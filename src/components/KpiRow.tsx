@@ -1,17 +1,19 @@
 import { getKpis } from "@/lib/data";
 import { StatCounter } from "./StatCounter";
 import { Sparkline } from "./Sparkline";
+import { Reveal } from "./Reveal";
 
 export async function KpiRow() {
   const kpis = await getKpis();
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {kpis.map((k) => {
+      {kpis.map((k, i) => {
         const up = k.deltaPct >= 0;
         return (
-          <div
+          <Reveal
             key={k.label}
+            delay={i * 0.06}
             className="rounded-xl border border-panel-line bg-bg-elevated p-5"
           >
             <div className="text-[0.82rem] text-ink-dim">{k.label}</div>
@@ -30,7 +32,7 @@ export async function KpiRow() {
             <div className="mt-3">
               <Sparkline values={k.spark} color="var(--accent-soft)" />
             </div>
-          </div>
+          </Reveal>
         );
       })}
     </div>

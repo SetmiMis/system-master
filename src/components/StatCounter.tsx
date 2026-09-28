@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "framer-motion";
+import { useInView } from "motion/react";
 
 export function StatCounter({ value, suffix }: { value: string; suffix?: string }) {
   const target = parseFloat(value);

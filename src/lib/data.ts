@@ -118,3 +118,176 @@ export async function getActivityFeed(): Promise<ActivityEvent[]> {
     { id: 6, text: "Order #4815 delivery confirmed by client", minsAgo: 46 },
   ];
 }
+
+// --- Homepage content (source: setmiindia.com, About Us) ---
+
+export type CompanyStat = { label: string; value: number; suffix?: string };
+export type ProductCategory = { name: string; bestFor: string[] };
+export type ProcessStep = { n: string; title: string; body: string };
+export type FaqItem = { q: string; a: string };
+export type LinkedSystem = {
+  name: string;
+  description: string;
+  url: string;
+  status: "operational" | "unreachable" | "not connected";
+};
+
+export async function getCompanyStory() {
+  return {
+    heading: "Your trusted electronics partner, powering innovation since 1983.",
+    body: "Setmi India began its journey in 1983 with a simple goal: to make connections stronger and more reliable. Over the decades, we have grown from a small venture into a leader in audio-video cables, connectors, and multimedia solutions. Our commitment to quality, backed by innovative design and precise engineering, drives us to provide cutting-edge products that meet the evolving needs of homes and industries across India.",
+  };
+}
+
+export async function getCompanyStats(): Promise<CompanyStat[]> {
+  return [
+    { label: "Orders fulfilled", value: 10000, suffix: "+" },
+    { label: "Customers served", value: 600, suffix: "+" },
+    { label: "Support staff", value: 50 },
+    { label: "Years in business", value: 43, suffix: "+" },
+  ];
+}
+
+export async function getProductCategories(): Promise<ProductCategory[]> {
+  return [
+    {
+      name: "GX Series",
+      bestFor: ["Automation systems & CNC machines", "LED lighting & robotics", "Aviation electronics"],
+    },
+    {
+      name: "UHF Series",
+      bestFor: ["Custom coaxial cable assemblies", "CB & amateur radio setups", "Portable wireless devices"],
+    },
+    {
+      name: "SMA Series",
+      bestFor: ["High-frequency RF applications", "Satellite communication gear", "Mobile radio systems"],
+    },
+    {
+      name: "BNC Series",
+      bestFor: ["High-speed video surveillance", "Laboratory test gear", "Antenna cable connections up to 4 GHz"],
+    },
+    {
+      name: "Circular & Waterproof",
+      bestFor: ["Outdoor and industrial enclosures", "Panel-mount wiring", "Harsh-environment installations"],
+    },
+    {
+      name: "Cables, Splitters & Plugs",
+      bestFor: ["AV cable assemblies", "HDMI splitting & distribution", "Sockets, plugs & couplers"],
+    },
+  ];
+}
+
+export async function getProcessSteps(): Promise<ProcessStep[]> {
+  return [
+    { n: "01", title: "Enquiry", body: "Client shares the connector type, specs, and quantity needed." },
+    { n: "02", title: "Technical vetting", body: "Our team checks the spec against catalogued parts and flags custom needs." },
+    { n: "03", title: "Quotation", body: "Pricing and lead time confirmed, PO raised." },
+    { n: "04", title: "Stock or production", body: "Parts allocated from inventory, or routed to production." },
+    { n: "05", title: "Quality check", body: "Every order inspected under ISO 9001:2015 procedure." },
+    { n: "06", title: "Dispatch", body: "Packed, labelled, and handed off with a tracking reference." },
+    { n: "07", title: "Delivery", body: "Order closed once delivery is confirmed with the client." },
+  ];
+}
+
+export async function getAfterSales() {
+  return [
+    {
+      title: "Warranty support",
+      body: "Manufacturing defects reported within the warranty window are replaced or repaired at no cost.",
+    },
+    {
+      title: "Replacement window",
+      body: "Wrong or damaged items can be flagged within 7 days of delivery for a straight replacement.",
+    },
+    {
+      title: "Technical support",
+      body: "Our team helps with spec matching, compatibility questions, and installation queries after the sale.",
+    },
+    {
+      title: "Reorder history",
+      body: "Past orders and specs stay on file, so a reorder never starts from a blank enquiry.",
+    },
+  ];
+}
+
+export async function getFaqs(): Promise<FaqItem[]> {
+  return [
+    {
+      q: "What's the minimum order quantity?",
+      a: "Most connector series are available from single-piece orders; bulk pricing applies above standard slab quantities.",
+    },
+    {
+      q: "Can you build to a custom spec?",
+      a: "Yes — share a drawing or spec sheet during enquiry and our team will confirm feasibility before quoting.",
+    },
+    {
+      q: "How long does dispatch take?",
+      a: "In-stock orders typically dispatch within 2–3 business days; custom or bulk orders depend on production load.",
+    },
+    {
+      q: "Do you ship across India?",
+      a: "Yes, we dispatch pan-India through courier and freight partners with tracking shared on handoff.",
+    },
+    {
+      q: "What if a part arrives damaged?",
+      a: "Report it within 7 days of delivery with photos, and we'll arrange a replacement.",
+    },
+  ];
+}
+
+export async function getLinkedSystems(): Promise<LinkedSystem[]> {
+  // ponytail: real deployment URLs, pulled from the team's Vercel projects.
+  // All sit behind Vercel's own sign-in (SSO protection) until a custom
+  // domain is attached — that's why "operational" here means "deployed and
+  // building successfully," not "publicly reachable."
+  return [
+    {
+      name: "Purchase FMS",
+      description: "Purchase order and vendor management.",
+      url: "https://setmi-purchase-fms.vercel.app",
+      status: "operational",
+    },
+    {
+      name: "Sales FMS",
+      description: "Sales order and client billing.",
+      url: "https://sales-fms.vercel.app",
+      status: "operational",
+    },
+    {
+      name: "Setmi OMS",
+      description: "Order management system — the desk this dashboard reflects.",
+      url: "https://setmi-oms.vercel.app",
+      status: "operational",
+    },
+    {
+      name: "ERP Manufacturing",
+      description: "Production planning and shop-floor tracking.",
+      url: "https://erp-manufacturing-frontend.vercel.app",
+      status: "operational",
+    },
+    {
+      name: "Staff Attendance",
+      description: "Attendance and shift tracking for floor staff.",
+      url: "https://staff-attendance-ten.vercel.app",
+      status: "operational",
+    },
+    {
+      name: "Budget vs Actual",
+      description: "Monthly budget tracking against actual spend.",
+      url: "https://budget-vs-actual-three.vercel.app",
+      status: "operational",
+    },
+    {
+      name: "Work Checklist",
+      description: "Daily task and checklist tracking.",
+      url: "https://work-checklist-xi.vercel.app",
+      status: "operational",
+    },
+    {
+      name: "MIS Control Center",
+      description: "Cross-system reporting and MIS dashboards.",
+      url: "https://mis-control-center.vercel.app",
+      status: "operational",
+    },
+  ];
+}

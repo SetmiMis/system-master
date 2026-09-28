@@ -1,3 +1,5 @@
+import { Reveal } from "./Reveal";
+
 export function SectionHead({
   eyebrow,
   title,
@@ -8,7 +10,7 @@ export function SectionHead({
   lede: string;
 }) {
   return (
-    <div className="mb-[52px] max-w-[64ch]">
+    <Reveal className="mb-[52px] max-w-[64ch]">
       <div className="mb-3.5 flex items-center gap-3 font-data text-[0.76rem] uppercase tracking-[0.14em] text-accent-strong before:h-px before:w-[22px] before:bg-accent-soft before:content-['']">
         {eyebrow}
       </div>
@@ -16,6 +18,6 @@ export function SectionHead({
       <p className="mt-3.5 max-w-[58ch] text-[1.03rem] leading-relaxed text-ink-dim">
         {lede}
       </p>
-    </div>
+    </Reveal>
   );
 }

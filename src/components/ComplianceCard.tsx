@@ -1,3 +1,7 @@
+"use client";
+
+import { motion } from "motion/react";
+
 const rows = [
   "Access limited to assigned order staff",
   "Daily backup of order & client records",
@@ -15,8 +19,12 @@ export function ComplianceCard() {
 
       <ul className="mt-5 space-y-0">
         {rows.map((row, i) => (
-          <li
+          <motion.li
             key={row}
+            initial={{ opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.4, delay: i * 0.08 }}
             className={`flex items-center gap-3 py-3 ${
               i < rows.length - 1 ? "border-b border-panel-line" : ""
             }`}
@@ -27,7 +35,7 @@ export function ComplianceCard() {
               </svg>
             </span>
             <span className="text-[0.88rem] font-medium">{row}</span>
-          </li>
+          </motion.li>
         ))}
       </ul>
     </div>

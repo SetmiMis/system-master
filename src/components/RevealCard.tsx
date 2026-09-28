@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import type { ReactNode } from "react";
 
 export function RevealCard({ children, delay = 0 }: { children: ReactNode; delay?: number }) {

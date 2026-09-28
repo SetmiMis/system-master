@@ -1,4 +1,5 @@
 import { getCategoryBreakdown } from "@/lib/data";
+import { GrowBar } from "./GrowBar";
 
 const colors = ["var(--cat-1)", "var(--cat-2)", "var(--cat-3)", "var(--cat-4)", "var(--cat-5)", "var(--cat-6)"];
 
@@ -23,9 +24,12 @@ export async function CategoryBars() {
               {c.name}
             </div>
             <div className="relative h-4 flex-1 overflow-hidden rounded-full bg-[color-mix(in_srgb,var(--ink)_6%,transparent)]">
-              <div
+              <GrowBar
+                axis="width"
+                size={`${Math.max(4, (c.value / max) * 100)}%`}
+                delay={i * 0.05}
                 className="h-full rounded-full"
-                style={{ width: `${Math.max(4, (c.value / max) * 100)}%`, background: colors[i % colors.length] }}
+                style={{ background: colors[i % colors.length] }}
               />
             </div>
             <div className="w-[34px] flex-none text-right font-data text-[0.85rem] font-semibold tabular-nums">

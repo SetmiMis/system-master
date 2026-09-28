@@ -1,5 +1,6 @@
 import { getPipelineStages } from "@/lib/data";
 import { SectionHead } from "./SectionHead";
+import { GrowBar } from "./GrowBar";
 
 export async function PipelineBoard() {
   const stages = await getPipelineStages();
@@ -28,9 +29,11 @@ export async function PipelineBoard() {
                   {s.stage}
                 </div>
                 <div className="relative h-6 flex-1 overflow-hidden rounded-full bg-[color-mix(in_srgb,var(--accent-soft)_12%,transparent)]">
-                  <div
+                  <GrowBar
+                    axis="width"
+                    size={`${pct}%`}
+                    delay={i * 0.05}
                     className={`h-full rounded-full ${isDelivered ? "bg-ok" : "bg-accent"}`}
-                    style={{ width: `${pct}%` }}
                   />
                 </div>
                 <div className="w-[52px] flex-none text-right font-data text-[0.9rem] font-semibold tabular-nums">

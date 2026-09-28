@@ -1,4 +1,5 @@
 import { getOrderVolume } from "@/lib/data";
+import { GrowBar } from "./GrowBar";
 
 export async function OrderVolumeChart() {
   const weeks = await getOrderVolume();
@@ -11,7 +12,7 @@ export async function OrderVolumeChart() {
       <p className="mt-1 text-[0.82rem] text-ink-dim">Orders placed per week, across all product lines.</p>
 
       <div className="mt-6 flex items-end gap-3" style={{ height: chartH }}>
-        {weeks.map((w) => {
+        {weeks.map((w, i) => {
           const h = Math.max(6, (w.orders / max) * chartH);
           const isLast = w.week === weeks[weeks.length - 1].week;
           return (
@@ -19,9 +20,11 @@ export async function OrderVolumeChart() {
               <span className="font-data text-[0.7rem] font-semibold tabular-nums text-ink-dim">
                 {w.orders}
               </span>
-              <div
+              <GrowBar
+                axis="height"
+                size={`${h}px`}
+                delay={i * 0.04}
                 className={`w-full rounded-t-[4px] ${isLast ? "bg-accent" : "bg-accent-soft/55"}`}
-                style={{ height: h }}
               />
               <span className="font-data text-[0.68rem] text-ink-dim">{w.week}</span>
             </div>
