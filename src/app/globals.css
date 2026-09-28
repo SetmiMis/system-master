@@ -83,6 +83,10 @@ h1, h2, h3 {
   background: var(--header-gradient);
 }
 
+.zoomable-dialog::backdrop {
+  background: rgba(4, 10, 16, 0.85);
+}
+
 .trace {
   stroke: var(--accent-soft);
   stroke-width: 1.6;

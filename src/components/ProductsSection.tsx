@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { getProductCategories } from "@/lib/data";
 import { SectionHead } from "./SectionHead";
 import { RevealCard } from "./RevealCard";
+import { ZoomableImage } from "./ZoomableImage";
 
 export async function ProductsSection() {
   const categories = await getProductCategories();
@@ -18,10 +18,9 @@ export async function ProductsSection() {
         {categories.map((c, i) => (
           <RevealCard key={c.name} delay={i * 0.05}>
             <div className="relative -mx-[26px] -mt-[26px] mb-4 h-[150px] overflow-hidden rounded-t-xl bg-bg">
-              <Image
+              <ZoomableImage
                 src={c.image}
                 alt={c.name}
-                fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className="object-cover"
                 style={{ objectPosition: c.imagePosition }}

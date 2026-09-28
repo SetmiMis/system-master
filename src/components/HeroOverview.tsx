@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "motion/react";
 import { MotionLink } from "./MotionLink";
 import { CircuitBackground } from "./CircuitBackground";
+import { ZoomableImage } from "./ZoomableImage";
 
 export function HeroOverview() {
   return (
@@ -74,13 +74,13 @@ export function HeroOverview() {
         transition={{ duration: 0.7, delay: 0.32 }}
         className="relative mt-10 h-[220px] overflow-hidden rounded-2xl border border-panel-line sm:h-[320px]"
       >
-        <Image
+        <ZoomableImage
           src="/products/hero.png"
           alt="Setmi India GX Series connectors"
-          fill
-          priority
           sizes="100vw"
-          className="object-cover object-[center_28%]"
+          className="object-cover"
+          style={{ objectPosition: "center 28%" }}
+          priority
         />
       </motion.div>
     </section>
