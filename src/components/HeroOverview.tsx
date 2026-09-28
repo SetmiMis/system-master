@@ -75,7 +75,7 @@ export function HeroOverview() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-bottom"
+          className="object-cover object-[center_28%]"
         />
       </motion.div>
     </section>

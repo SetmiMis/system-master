@@ -23,7 +23,7 @@ export async function ProductsSection() {
                 alt={c.name}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                className="object-cover object-bottom"
+                className="object-cover object-[center_30%]"
               />
             </div>
             <h3 className="text-[1.06rem] font-bold">{c.name}</h3>
