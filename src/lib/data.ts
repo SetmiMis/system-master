@@ -122,7 +122,7 @@ export async function getActivityFeed(): Promise<ActivityEvent[]> {
 // --- Homepage content (source: setmiindia.com, About Us) ---
 
 export type CompanyStat = { label: string; value: number; suffix?: string };
-export type ProductCategory = { name: string; bestFor: string[] };
+export type ProductCategory = { name: string; bestFor: string[]; image: string };
 export type ProcessStep = { n: string; title: string; body: string };
 export type FaqItem = { q: string; a: string };
 export type LinkedSystem = {
@@ -153,25 +153,31 @@ export async function getProductCategories(): Promise<ProductCategory[]> {
     {
       name: "GX Series",
       bestFor: ["Automation systems & CNC machines", "LED lighting & robotics", "Aviation electronics"],
+      image: "/products/hero.png",
     },
     {
       name: "UHF Series",
       bestFor: ["Custom coaxial cable assemblies", "CB & amateur radio setups", "Portable wireless devices"],
+      image: "/products/cat-a.png",
     },
     {
       name: "SMA Series",
       bestFor: ["High-frequency RF applications", "Satellite communication gear", "Mobile radio systems"],
+      image: "/products/sma.png",
     },
     {
       name: "BNC Series",
       bestFor: ["High-speed video surveillance", "Laboratory test gear", "Antenna cable connections up to 4 GHz"],
+      image: "/products/cat-c.png",
     },
     {
       name: "Circular & Waterproof",
       bestFor: ["Outdoor and industrial enclosures", "Panel-mount wiring", "Harsh-environment installations"],
+      image: "/products/mc4.jpg",
     },
     {
       name: "Cables, Splitters & Plugs",
+      image: "/products/cables.webp",
       bestFor: ["AV cable assemblies", "HDMI splitting & distribution", "Sockets, plugs & couplers"],
     },
   ];

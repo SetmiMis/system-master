@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 import { MotionLink } from "./MotionLink";
 
@@ -60,6 +61,22 @@ export function HeroOverview() {
         >
           See the live dashboard
         </MotionLink>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.32 }}
+        className="relative mt-10 h-[220px] overflow-hidden rounded-2xl border border-panel-line sm:h-[320px]"
+      >
+        <Image
+          src="/products/hero.png"
+          alt="Setmi India GX Series connectors"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-bottom"
+        />
       </motion.div>
     </section>
   );

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getCompanyStory, getCompanyStats } from "@/lib/data";
 import { SectionHead } from "./SectionHead";
 import { StatCounter } from "./StatCounter";
@@ -25,6 +26,38 @@ export async function StorySection() {
           </Reveal>
         ))}
       </div>
+
+      <Reveal delay={0.1} className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div className="relative h-[240px] overflow-hidden rounded-xl border border-panel-line sm:h-full">
+          <Image
+            src="/team/team-1.jpg"
+            alt="Setmi India team at an industry exhibition"
+            fill
+            sizes="(max-width: 640px) 100vw, 50vw"
+            className="object-cover"
+          />
+        </div>
+        <div className="grid grid-cols-2 gap-3 sm:grid-rows-2 sm:grid-cols-1">
+          <div className="relative h-[115px] overflow-hidden rounded-xl border border-panel-line sm:h-full">
+            <Image
+              src="/team/team-2.png"
+              alt="Setmi India team signing a business agreement"
+              fill
+              sizes="(max-width: 640px) 50vw, 25vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="relative h-[115px] overflow-hidden rounded-xl border border-panel-line sm:h-full">
+            <Image
+              src="/team/team-3.png"
+              alt="Setmi India team at their exhibition booth"
+              fill
+              sizes="(max-width: 640px) 50vw, 25vw"
+              className="object-cover"
+            />
+          </div>
+        </div>
+      </Reveal>
     </section>
   );
 }

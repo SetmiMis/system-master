@@ -16,14 +16,14 @@ const defaultLinks: NavLink[] = [
 export function TopBar({ links = defaultLinks }: { links?: NavLink[] }) {
   return (
     <header className="header-gradient sticky top-0 z-40 shadow-[0_2px_14px_rgba(1,53,86,0.25)]">
-      <div className="mx-auto flex max-w-[1180px] items-center justify-between gap-4 px-6 py-3">
+      <div className="mx-auto flex max-w-[1180px] items-center justify-between gap-4 px-6 py-2">
         <a href="/" className="flex-none">
           <Image
             src="/setmi-logo.png"
             alt="Setmi India"
             width={175}
             height={58}
-            className="h-[38px] w-auto"
+            className="h-[62px] w-auto"
             priority
           />
         </a>

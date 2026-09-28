@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getProductCategories } from "@/lib/data";
 import { SectionHead } from "./SectionHead";
 import { RevealCard } from "./RevealCard";
@@ -16,6 +17,15 @@ export async function ProductsSection() {
       <div className="grid grid-cols-1 gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
         {categories.map((c, i) => (
           <RevealCard key={c.name} delay={i * 0.05}>
+            <div className="relative -mx-[26px] -mt-[26px] mb-4 h-[150px] overflow-hidden rounded-t-xl bg-bg">
+              <Image
+                src={c.image}
+                alt={c.name}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="object-cover object-bottom"
+              />
+            </div>
             <h3 className="text-[1.06rem] font-bold">{c.name}</h3>
             <div className="mt-1 text-[0.7rem] uppercase tracking-[0.06em] text-accent-strong">
               Best for
