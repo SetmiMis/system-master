@@ -27,7 +27,7 @@ export async function StorySection() {
         ))}
       </div>
 
-      <Reveal delay={0.1} className="mt-6 grid grid-cols-1 gap-3 sm:h-[320px] sm:grid-cols-2">
+      <Reveal delay={0.1} className="mt-6 grid grid-cols-1 gap-3 sm:h-[420px] sm:grid-cols-2">
         <div className="relative h-[240px] overflow-hidden rounded-xl border border-panel-line sm:h-full">
           <Image
             src="/team/team-1.jpg"
@@ -38,22 +38,22 @@ export async function StorySection() {
           />
         </div>
         <div className="grid grid-cols-2 gap-3 sm:h-full sm:grid-cols-1 sm:grid-rows-2">
-          <div className="relative h-[115px] overflow-hidden rounded-xl border border-panel-line sm:h-full">
+          <div className="relative h-[160px] overflow-hidden rounded-xl border border-panel-line sm:h-full">
             <Image
               src="/team/team-2.png"
-              alt="Setmi India team signing a business agreement"
+              alt="Setmi India team signing a business agreement with a customer"
               fill
               sizes="(max-width: 640px) 50vw, 25vw"
-              className="object-cover"
+              className="object-cover object-top"
             />
           </div>
-          <div className="relative h-[115px] overflow-hidden rounded-xl border border-panel-line sm:h-full">
+          <div className="relative h-[160px] overflow-hidden rounded-xl border border-panel-line sm:h-full">
             <Image
               src="/team/team-3.png"
-              alt="Setmi India team at their exhibition booth"
+              alt="Setmi India team discussing an order with a customer"
               fill
               sizes="(max-width: 640px) 50vw, 25vw"
-              className="object-cover"
+              className="object-cover object-top"
             />
           </div>
         </div>
