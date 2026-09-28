@@ -14,10 +14,9 @@ export function TopBar() {
         />
         <nav className="hidden gap-6 sm:flex">
           {[
-            ["Overview", "#overview"],
-            ["The Story", "#story"],
+            ["Pipeline", "#pipeline"],
             ["Systems", "#systems"],
-            ["Data & Security", "#security"],
+            ["Desk View", "#security"],
           ].map(([label, href]) => (
             <a
               key={href}

@@ -1,10 +1,11 @@
 import { TopBar } from "@/components/TopBar";
-import { Hero } from "@/components/Hero";
-import { Overview } from "@/components/Overview";
-import { StoryPipeline } from "@/components/StoryPipeline";
+import { DashboardHeader } from "@/components/DashboardHeader";
+import { KpiRow } from "@/components/KpiRow";
+import { PipelineBoard } from "@/components/PipelineBoard";
+import { ChartsRow } from "@/components/ChartsRow";
 import { SystemsGrid } from "@/components/SystemsGrid";
-import { SecuritySection } from "@/components/SecuritySection";
-import { CTASection, Footer } from "@/components/CTASection";
+import { OpsRow } from "@/components/OpsRow";
+import { DashboardFooter } from "@/components/DashboardFooter";
 
 export default function Home() {
   return (
@@ -12,14 +13,14 @@ export default function Home() {
       <div className="grid-field" />
       <TopBar />
       <main className="mx-auto max-w-[1180px] px-6">
-        <Hero />
-        <Overview />
-        <StoryPipeline />
+        <DashboardHeader />
+        <KpiRow />
+        <PipelineBoard />
+        <ChartsRow />
         <SystemsGrid />
-        <SecuritySection />
-        <CTASection />
+        <OpsRow />
+        <DashboardFooter />
       </main>
-      <Footer />
     </>
   );
 }

@@ -10,8 +10,16 @@
   --accent-strong: #013556;
   --accent-soft: #4c9fc4;
   --ok: #047c00;
+  --warn: #b45309;
+  --critical: #b3261e;
   --grid-line: rgba(1, 53, 86, 0.05);
   --header-gradient: linear-gradient(45deg, #4c9fc4 0%, #013556 100%);
+  --cat-1: #0b6fa8;
+  --cat-2: #2fb6d9;
+  --cat-3: #1e9e6b;
+  --cat-4: #d18a17;
+  --cat-5: #8b5fbf;
+  --cat-6: #d2574b;
   color-scheme: light;
 }
 
@@ -26,7 +34,15 @@
     --accent-strong: #7fc4e8;
     --accent-soft: #4c9fc4;
     --ok: #4bd191;
+    --warn: #e8a33d;
+    --critical: #f2685c;
     --grid-line: rgba(255, 255, 255, 0.045);
+    --cat-1: #3987e5;
+    --cat-2: #1f8f7a;
+    --cat-3: #c77c11;
+    --cat-4: #2e9e55;
+    --cat-5: #9a6fd6;
+    --cat-6: #d2574b;
     color-scheme: dark;
   }
 }
@@ -40,6 +56,14 @@
   --color-accent-strong: var(--accent-strong);
   --color-accent-soft: var(--accent-soft);
   --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-critical: var(--critical);
+  --color-cat-1: var(--cat-1);
+  --color-cat-2: var(--cat-2);
+  --color-cat-3: var(--cat-3);
+  --color-cat-4: var(--cat-4);
+  --color-cat-5: var(--cat-5);
+  --color-cat-6: var(--cat-6);
   --color-panel-line: var(--panel-line);
   --font-display: var(--font-inter);
   --font-body: var(--font-inter);
