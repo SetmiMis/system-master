@@ -36,8 +36,8 @@ export default async function Home() {
           "Call +91 85868 78111",
         ]}
       />
+      <HeroOverview rating={`★ ${reviews.rating} on Google · ${reviews.count} reviews`} />
       <main className="mx-auto max-w-[1180px] px-6">
-        <HeroOverview rating={`★ ${reviews.rating} on Google · ${reviews.count} reviews`} />
         <StorySection />
         <ProductsSection />
         <ShopSection />
