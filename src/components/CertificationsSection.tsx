@@ -25,6 +25,10 @@ export function CertificationsSection() {
             <dt className="text-ink-dim">Valid until</dt>
             <dd className="font-semibold">14 Oct 2028</dd>
           </dl>
+          <a href="/iso-9001-certificate.pdf" target="_blank" rel="noopener" className="mt-4 block overflow-hidden rounded-lg border border-panel-line bg-white">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/iso-9001-certificate.jpg" alt="ISO 9001:2015 certificate — Setmi India" loading="lazy" className="max-h-[420px] w-full object-contain" />
+          </a>
           <a
             href="/iso-9001-certificate.pdf"
             target="_blank"
