@@ -18,7 +18,10 @@ export const metadata: Metadata = {
   title: "Setmi India — The Order Pipeline",
   description:
     "The story of how a Setmi India order moves from enquiry to delivery — and the systems that carry it.",
+  openGraph: { title: "Setmi India — RF connectors & AV cables since 1983", images: ["/products/hero.png"] },
 };
+
+export const viewport = { themeColor: "#013556" };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (

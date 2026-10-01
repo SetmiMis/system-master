@@ -9,6 +9,7 @@ export function HeroOverview() {
   return (
     <section id="overview" className="pb-14 pt-12">
       <div className="relative -mx-6 px-6 pb-2 pt-2 sm:-mx-10 sm:px-10">
+        <div className="hero-glow" />
         <CircuitBackground />
 
         <motion.div
@@ -31,9 +32,9 @@ export function HeroOverview() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.08 }}
-          className="relative max-w-[16ch] text-[clamp(2.2rem,5vw,3.6rem)] font-extrabold leading-[1.05]"
+          className="relative max-w-[20ch] text-[clamp(2.2rem,5vw,3.6rem)] font-extrabold leading-[1.05]"
         >
-          Your trusted electronics partner, engineered for the extraordinary.
+          Your trusted electronics partner, engineered for the <span className="text-gradient">extraordinary.</span>
         </motion.h1>
 
         <motion.p
@@ -55,7 +56,7 @@ export function HeroOverview() {
         >
           <MotionLink
             href="#products"
-            className="rounded-lg bg-accent px-[22px] py-[13px] text-[0.92rem] font-bold text-white hover:bg-accent-strong"
+            className="btn-primary rounded-lg px-[22px] py-[13px] text-[0.92rem] font-bold text-white"
           >
             Explore product lines
           </MotionLink>
@@ -72,7 +73,7 @@ export function HeroOverview() {
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.32 }}
-        className="relative mt-10 h-[220px] overflow-hidden rounded-2xl border border-panel-line sm:h-[320px]"
+        className="relative mt-10 h-[220px] overflow-hidden rounded-2xl border border-panel-line shadow-[0_30px_60px_-30px_rgba(1,53,86,0.5)] sm:h-[320px]"
       >
         <ZoomableImage
           src="/products/hero.png"

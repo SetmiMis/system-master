@@ -11,7 +11,7 @@ export function RevealCard({ children, delay = 0 }: { children: ReactNode; delay
       viewport={{ once: true, margin: "-60px" }}
       whileHover={{ y: -4 }}
       transition={{ duration: 0.5, delay }}
-      className="rounded-xl border border-panel-line bg-bg-elevated p-[26px] transition-[border-color,box-shadow] duration-300 hover:border-accent hover:shadow-[0_14px_30px_-18px_rgba(15,122,134,0.6)]"
+      className="rounded-xl border border-panel-line bg-bg-elevated p-[26px] transition-[border-color,box-shadow] duration-300 hover:border-accent hover:shadow-[0_14px_30px_-18px_rgba(0,90,132,0.55)]"
     >
       {children}
     </motion.div>

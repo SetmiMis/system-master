@@ -15,6 +15,7 @@ export function SectionHead({
         {eyebrow}
       </div>
       <h2 className="text-[clamp(1.7rem,3.4vw,2.5rem)] font-extrabold">{title}</h2>
+      <div className="mt-4 h-[3px] w-12 rounded bg-gradient-to-r from-accent-soft to-accent-strong" />
       <p className="mt-3.5 max-w-[58ch] text-[1.03rem] leading-relaxed text-ink-dim">
         {lede}
       </p>
