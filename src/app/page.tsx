@@ -5,6 +5,7 @@ import { ProductsSection } from "@/components/ProductsSection";
 import { SystemsSummarySection } from "@/components/SystemsSummarySection";
 import { ProcessSection } from "@/components/ProcessSection";
 import { AfterSalesSection } from "@/components/AfterSalesSection";
+import { ConnectorSection } from "@/components/ConnectorSection";
 import { ShopSection } from "@/components/ShopSection";
 import { VideosSection } from "@/components/VideosSection";
 import { ReviewsSection } from "@/components/ReviewsSection";
@@ -40,6 +41,9 @@ export default async function Home() {
       <main className="mx-auto max-w-[1180px] px-6">
         <StorySection />
         <ProductsSection />
+      </main>
+      <ConnectorSection />
+      <main className="mx-auto max-w-[1180px] px-6">
         <ShopSection />
         <WhyChooseSection />
         <CertificationsSection />
