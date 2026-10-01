@@ -50,20 +50,22 @@ export function CertificationsSection() {
 
       <div className="mt-8">
         <div className="mb-3 text-[0.72rem] uppercase tracking-[0.06em] text-accent-strong">Also find us on</div>
-        <div className="flex flex-wrap gap-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {[
-            ["Amazon.in", "https://www.amazon.in/stores/SetmiIndia/page/0A46CD60-B6C5-4476-BD1D-01F0AC3DE15B"],
-            ["IndustryBuying", "https://www.industrybuying.com/brands/setmi-india-26440/it-security-3369/networking-connecters-14410"],
-            ["GeM", "https://gem.gov.in"],
-          ].map(([name, href]) => (
+            ["Amazon.in", "/logos/amazon.svg", "https://www.amazon.in/stores/SetmiIndia/page/0A46CD60-B6C5-4476-BD1D-01F0AC3DE15B"],
+            ["IndustryBuying", "/logos/industrybuying.webp", "https://www.industrybuying.com/brands/setmi-india-26440/it-security-3369/networking-connecters-14410"],
+            ["Government e-Marketplace (GeM)", "/gem-logo.png", "https://gem.gov.in"],
+          ].map(([name, logo, href]) => (
             <a
               key={name}
               href={href}
               target="_blank"
               rel="noopener"
-              className="rounded-full border border-panel-line bg-bg-elevated px-5 py-2 text-[0.88rem] font-semibold transition-colors hover:border-accent hover:text-accent"
+              className="group flex flex-col items-center gap-3 rounded-xl border border-panel-line bg-white p-5 transition-all hover:-translate-y-1 hover:border-accent hover:shadow-[0_14px_30px_-18px_rgba(0,90,132,0.55)]"
             >
-              {name} →
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={logo} alt={name} loading="lazy" className="h-12 w-full object-contain" />
+              <span className="text-[0.82rem] font-semibold text-accent group-hover:underline">Visit our store →</span>
             </a>
           ))}
         </div>
