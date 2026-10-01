@@ -1,6 +1,9 @@
-// Single seam for real data. Every dashboard panel reads from these functions —
-// swap the mock return for a DB query / API call to your own system and the
-// whole dashboard updates. Nothing else needs to change.
+// Dashboard data layer — customer-safe numbers only.
+// Live source: the E2O FMS Apps Script (PublicMetrics.js) returns counts only — no names, phones, values,
+// win/loss, overdue or backlog. Set E2O_METRICS_URL (web app /exec URL) and E2O_METRICS_KEY in Vercel;
+// unset or failing => the sample numbers below, shown with a "Demo data" badge.
+
+import { getReviews } from "@/lib/reviews";
 
 export type Kpi = {
   label: string;
@@ -10,31 +13,25 @@ export type Kpi = {
   spark?: number[];
 };
 
-export type PipelineStage = { stage: string; count: number; total?: boolean };
-export type StateEnquiries = { state: string; iso: string; count: number; lat: number | null; lng: number | null };
 export type WeekVolume = { week: string; orders: number };
-export type CategorySlice = { name: string; value: number };
+export type StateEnquiries = { state: string; iso: string; count: number; lat: number | null; lng: number | null };
+export type DemandItem = { name: string; count: number };
 export type SystemStatus = {
   title: string;
   body: string;
   status: "operational" | "degraded";
   lastSync: string;
 };
-export type ActivityEvent = { id: number; text: string; minsAgo: number };
 
-// Live counts from the E2O FMS Apps Script (PublicMetrics.js) — counts only, no customer data.
-// Set E2O_METRICS_URL (web app /exec URL) and E2O_METRICS_KEY in Vercel; unset or failing => mock data below.
 type Metrics = {
   asOf: string;
-  openEnquiries: number;
-  wonThisMonth: number;
-  winRate: number;
-  overdueFollowUps: number;
-  dueToday: number;
-  priorities: { hot: number; warm: number; cold: number };
-  funnel: Record<string, number>;
-  sources: { labels: string[]; data: number[] };
+  customers: number;
+  enquiriesTotal: number;
+  enquiriesThisMonth: number;
+  callsThisMonth: number;
+  followUpsThisMonth: number;
   months: { categories: string[]; data: number[] };
+  demand: DemandItem[];
   states: StateEnquiries[];
 };
 
@@ -56,15 +53,8 @@ export async function getMetricsAsOf(): Promise<string | null> {
   return (await loadMetrics())?.asOf ?? null;
 }
 
-export type Focus = { hot: number; warm: number; cold: number; overdue: number; dueToday: number };
+const demoMonths = { categories: ["Apr 2026", "May 2026", "Jun 2026", "Jul 2026", "Aug 2026", "Sep 2026"], data: [212, 268, 301, 355, 412, 487] };
 
-export async function getFocus(): Promise<Focus> {
-  const m = await loadMetrics();
-  if (m) return { ...m.priorities, overdue: m.overdueFollowUps, dueToday: m.dueToday };
-  return { hot: 14, warm: 22, cold: 11, overdue: 9, dueToday: 6 };
-}
-
-// ponytail: sample states shown (badged "Demo data") until the E2O feed is connected.
 const demoStates: StateEnquiries[] = [
   { state: "Delhi", iso: "IN-DL", count: 412, lat: 28.6, lng: 77.2 },
   { state: "Maharashtra", iso: "IN-MH", count: 268, lat: 19.7, lng: 75.7 },
@@ -78,73 +68,39 @@ const demoStates: StateEnquiries[] = [
   { state: "Haryana", iso: "IN-HR", count: 64, lat: 29.0, lng: 76.1 },
 ];
 
+const demoDemand: DemandItem[] = [
+  { name: "Metal push switches", count: 34 },
+  { name: "Circular & GX connectors", count: 26 },
+  { name: "BNC / SMA / UHF (RF)", count: 18 },
+  { name: "HDMI & AV cables", count: 12 },
+  { name: "Audio & PA", count: 6 },
+  { name: "Solar (MC4)", count: 4 },
+];
+
 export async function getIndiaStates(): Promise<StateEnquiries[]> {
   return (await loadMetrics())?.states ?? demoStates;
 }
 
+export async function getOrderVolume(): Promise<WeekVolume[]> {
+  const months = (await loadMetrics())?.months ?? demoMonths;
+  return months.categories.map((week, i) => ({ week, orders: months.data[i] }));
+}
+
+export async function getDemand(): Promise<DemandItem[]> {
+  return (await loadMetrics())?.demand ?? demoDemand;
+}
+
 export async function getKpis(): Promise<Kpi[]> {
   const m = await loadMetrics();
-  if (m) {
-    return [
-      { label: "Open enquiries", value: m.openEnquiries },
-      { label: "Won this month", value: m.wonThisMonth },
-      { label: "Win rate", value: m.winRate, suffix: "%" },
-      { label: "Overdue follow-ups", value: m.overdueFollowUps },
-    ];
-  }
-  // ponytail: mock data, replace with a call to your order/inventory system
+  const r = await getReviews();
+  const months = m?.months ?? demoMonths;
+  const n = months.data.length;
+  const delta = n > 1 && months.data[n - 2] ? Math.round(((months.data[n - 1] - months.data[n - 2]) / months.data[n - 2]) * 1000) / 10 : undefined;
   return [
-    { label: "Open enquiries", value: 47, deltaPct: 8.2, spark: [30, 34, 33, 38, 41, 39, 44, 47] },
-    { label: "Won this month", value: 12, deltaPct: 4.1, spark: [6, 7, 9, 8, 10, 9, 11, 12] },
-    { label: "Win rate", value: 18, suffix: "%", deltaPct: 1.3, spark: [14, 15, 15, 16, 17, 17, 18, 18] },
-    { label: "Overdue follow-ups", value: 9, deltaPct: -6.5, spark: [15, 14, 13, 12, 12, 11, 10, 9] },
-  ];
-}
-
-export async function getPipelineStages(): Promise<PipelineStage[]> {
-  const m = await loadMetrics();
-  if (m) {
-    return ["New", "Quoted", "Follow-up", "Won", "Dispatched", "Closed", "Lost"].map((stage) => ({ stage, count: m.funnel[stage] ?? 0 }));
-  }
-  return [
-    { stage: "New", count: 38 },
-    { stage: "Quoted", count: 26 },
-    { stage: "Follow-up", count: 31 },
-    { stage: "Won", count: 12 },
-    { stage: "Dispatched", count: 9 },
-    { stage: "Closed", count: 44 },
-    { stage: "Lost", count: 61 },
-  ];
-}
-
-export async function getOrderVolume(): Promise<WeekVolume[]> {
-  const m = await loadMetrics();
-  if (m) return m.months.categories.map((week, i) => ({ week, orders: m.months.data[i] }));
-  return [
-    { week: "Apr 2026", orders: 212 },
-    { week: "May 2026", orders: 268 },
-    { week: "Jun 2026", orders: 301 },
-    { week: "Jul 2026", orders: 355 },
-    { week: "Aug 2026", orders: 412 },
-    { week: "Sep 2026", orders: 487 },
-  ];
-}
-
-export async function getCategoryBreakdown(): Promise<CategorySlice[]> {
-  const m = await loadMetrics();
-  if (m) {
-    return m.sources.labels
-      .map((name, i) => ({ name, value: m.sources.data[i] }))
-      .sort((a, b) => b.value - a.value)
-      .slice(0, 6);
-  }
-  return [
-    { name: "WhatsApp", value: 34 },
-    { name: "Meta Ads", value: 26 },
-    { name: "IndiaMART", value: 18 },
-    { name: "Walk-in", value: 12 },
-    { name: "Exhibition", value: 6 },
-    { name: "Other", value: 4 },
+    { label: "Customers served", value: m?.customers ?? 2069 },
+    { label: "Enquiries this month", value: m?.enquiriesThisMonth ?? months.data[n - 1], deltaPct: delta, spark: months.data },
+    { label: "Calls & follow-ups this month", value: m ? m.callsThisMonth + m.followUpsThisMonth : 1184 },
+    { label: `Google rating · ${r.count} reviews`, value: r.rating, suffix: "★" },
   ];
 }
 
@@ -186,17 +142,6 @@ export async function getSystems(): Promise<SystemStatus[]> {
       status: "operational",
       lastSync: "2m ago",
     },
-  ];
-}
-
-export async function getActivityFeed(): Promise<ActivityEvent[]> {
-  return [
-    { id: 1, text: "Order #4821 dispatched — BNC Series, 200 units", minsAgo: 2 },
-    { id: 2, text: "Quality check passed on batch #Q-1187", minsAgo: 9 },
-    { id: 3, text: "New enquiry logged — SMA connectors, custom spec", minsAgo: 14 },
-    { id: 4, text: "Order #4819 quote confirmed and PO raised", minsAgo: 22 },
-    { id: 5, text: "Inventory synced — GX Series stock updated", minsAgo: 31 },
-    { id: 6, text: "Order #4815 delivery confirmed by client", minsAgo: 46 },
   ];
 }
 

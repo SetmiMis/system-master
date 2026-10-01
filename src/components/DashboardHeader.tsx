@@ -28,9 +28,9 @@ export function DashboardHeader({ live, asOf }: { live: boolean; asOf: string | 
           />
           {live ? `Live · updated ${asOf}` : "Demo data · live feed pending"}
         </div>
-        <h1 className="text-[clamp(1.4rem,2.6vw,1.8rem)] font-extrabold">Sales Desk</h1>
+        <h1 className="text-[clamp(1.4rem,2.6vw,1.8rem)] font-extrabold">Setmi in numbers</h1>
         <p className="mt-1 text-[0.95rem] text-ink-dim">
-          Setmi India — a live view of enquiries and the sales desk.
+          Setmi India — live from our sales desk: who we serve and what they ask for.
         </p>
       </div>
       <div className="rounded-lg border border-panel-line bg-bg-elevated px-4 py-2.5 text-right">

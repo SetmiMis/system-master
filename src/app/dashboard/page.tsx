@@ -2,11 +2,10 @@ import { getMetricsAsOf } from "@/lib/data";
 import { TopBar } from "@/components/TopBar";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { KpiRow } from "@/components/KpiRow";
-import { PipelineBoard } from "@/components/PipelineBoard";
 import { OrderVolumeChart } from "@/components/OrderVolumeChart";
 import { CategoryBars } from "@/components/CategoryBars";
 import { IndiaMapSection } from "@/components/IndiaMapSection";
-import { FocusPanel } from "@/components/FocusPanel";
+import { TrustPanel } from "@/components/TrustPanel";
 import { DashboardFooter } from "@/components/DashboardFooter";
 
 export default async function DashboardPage() {
@@ -29,14 +28,13 @@ export default async function DashboardPage() {
             <OrderVolumeChart />
           </div>
           <div className="lg:col-span-4">
-            <PipelineBoard />
+            <CategoryBars />
           </div>
           <div id="map" className="lg:col-span-8">
             <IndiaMapSection />
           </div>
-          <div className="flex flex-col gap-4 lg:col-span-4">
-            <FocusPanel />
-            <CategoryBars />
+          <div className="lg:col-span-4">
+            <TrustPanel />
           </div>
         </div>
         <DashboardFooter />

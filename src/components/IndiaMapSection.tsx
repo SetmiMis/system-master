@@ -7,7 +7,7 @@ export async function IndiaMapSection() {
   if (!states.length) return null;
 
   return (
-    <Panel title="Where enquiries come from" sub="By state — click a bubble to filter the table">
+    <Panel title="Where our customers are" sub="By state — click a bubble to filter the table">
       <IndiaMap states={states} />
     </Panel>
   );
