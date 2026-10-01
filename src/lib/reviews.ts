@@ -4,7 +4,7 @@ export type ReviewData = { rating: number; count: number; reviews: Review[] };
 // Fallback: real Google reviews, used until GOOGLE_PLACES_API_KEY + GOOGLE_PLACE_ID are set in Vercel.
 const fallback: ReviewData = {
   rating: 4.9,
-  count: 300,
+  count: 301,
   reviews: [
     { author: "Google review", rating: 5, text: "Big variety, fix price, large display, good staff and owner always present." },
     { author: "Google review", rating: 5, text: "Product quality, service, and customer handling are excellent." },
