@@ -162,7 +162,7 @@ h1, h2, h3 {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  body::before, .hero-glow { animation: none; }
+  body::before, .hero-glow, .marquee { animation: none; }
   .trace {
     animation: none;
   }
@@ -170,4 +170,16 @@ h1, h2, h3 {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
   }
+}
+
+.marquee {
+  animation: marquee 45s linear infinite;
+}
+
+.marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
 }

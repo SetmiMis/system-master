@@ -46,7 +46,7 @@ export function QuoteSection() {
           <div className="font-semibold text-ink">Visit our store</div>
           167-168, Old Lajpat Rai Market, Opposite Red Fort (Chandni Chowk), Delhi-110006
           <a
-            href="https://www.google.com/maps/search/?api=1&query=Setmi+India+Old+Lajpat+Rai+Market+Delhi"
+            href="https://www.google.com/maps?cid=9005407250904435735"
             target="_blank"
             rel="noopener"
             className="mt-1 block font-semibold text-accent hover:underline"

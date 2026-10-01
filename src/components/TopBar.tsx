@@ -8,6 +8,8 @@ const defaultLinks: NavLink[] = [
   ["Story", "/#story"],
   ["Products", "/#products"],
   ["Shop", "/#shop"],
+  ["Reviews", "/#reviews"],
+  ["Videos", "/#videos"],
   ["Systems", "/#systems"],
   ["Process", "/#process"],
   ["Support", "/#after-sales"],
