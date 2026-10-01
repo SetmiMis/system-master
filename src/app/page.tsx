@@ -5,6 +5,7 @@ import { ProductsSection } from "@/components/ProductsSection";
 import { SystemsSummarySection } from "@/components/SystemsSummarySection";
 import { ProcessSection } from "@/components/ProcessSection";
 import { AfterSalesSection } from "@/components/AfterSalesSection";
+import { ShopSection } from "@/components/ShopSection";
 import { WhyChooseSection } from "@/components/WhyChooseSection";
 import { QuoteSection } from "@/components/QuoteSection";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
@@ -20,6 +21,7 @@ export default function Home() {
         <HeroOverview />
         <StorySection />
         <ProductsSection />
+        <ShopSection />
         <WhyChooseSection />
         <SystemsSummarySection />
         <ProcessSection />

@@ -7,6 +7,7 @@ const defaultLinks: NavLink[] = [
   ["Overview", "/#overview"],
   ["Story", "/#story"],
   ["Products", "/#products"],
+  ["Shop", "/#shop"],
   ["Systems", "/#systems"],
   ["Process", "/#process"],
   ["Support", "/#after-sales"],
@@ -30,7 +31,7 @@ export function TopBar({ links = defaultLinks }: { links?: NavLink[] }) {
             priority
           />
         </a>
-        <nav className="hidden flex-wrap justify-center gap-x-5 gap-y-1 lg:flex">
+        <nav className="hidden flex-wrap justify-center gap-x-5 gap-y-1 xl:flex">
           {links.map(([label, href]) => (
             <MotionLink
               key={href}
@@ -41,7 +42,7 @@ export function TopBar({ links = defaultLinks }: { links?: NavLink[] }) {
             </MotionLink>
           ))}
         </nav>
-        <div className="hidden flex-none items-center gap-4 lg:flex">
+        <div className="hidden flex-none items-center gap-4 xl:flex">
           <MotionLink href="/dashboard" className="text-[0.82rem] font-semibold text-white/80 hover:text-white">
             Dashboard
           </MotionLink>
@@ -53,7 +54,7 @@ export function TopBar({ links = defaultLinks }: { links?: NavLink[] }) {
           </MotionLink>
         </div>
 
-        <details className="group relative flex-none lg:hidden">
+        <details className="group relative flex-none xl:hidden">
           <summary className="flex h-9 w-9 cursor-pointer list-none items-center justify-center rounded-md border border-white/25 text-white">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-5 w-5 group-open:hidden">
               <path d="M4 6h16M4 12h16M4 18h16" strokeLinecap="round" />
