@@ -25,8 +25,8 @@ export function IndiaMap({ states }: { states: StateEnquiries[] }) {
       mappable.forEach((s) => {
         L.circleMarker([s.lat!, s.lng!], {
           radius: 4 + Math.sqrt(s.count / max) * 16,
-          color: "#005a84",
-          fillColor: "#4c9fc4",
+          color: "#86b6ef",
+          fillColor: "#3987e5",
           fillOpacity: 0.55,
           weight: 1.5,
         })
@@ -41,9 +41,9 @@ export function IndiaMap({ states }: { states: StateEnquiries[] }) {
   }, [states]);
 
   return (
-    <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1.6fr_1fr]">
-      <div ref={el} className="h-[380px] overflow-hidden rounded-xl border border-panel-line bg-bg-elevated" />
-      <div data-lenis-prevent className="max-h-[380px] overflow-auto rounded-xl border border-panel-line bg-bg-elevated p-5">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-[1.5fr_1fr]">
+      <div ref={el} className="h-[390px] overflow-hidden rounded-xl border border-panel-line" />
+      <div data-lenis-prevent className="max-h-[390px] overflow-auto rounded-xl border border-panel-line p-4">
         <div className="mb-3 flex items-baseline justify-between text-[0.8rem] text-ink-dim">
           <span>{picked ? `Filtered: ${picked}` : "All states"}</span>
           {picked && (

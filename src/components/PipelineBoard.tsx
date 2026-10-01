@@ -1,65 +1,44 @@
 import { getPipelineStages } from "@/lib/data";
-import { SectionHead } from "./SectionHead";
+import { Panel } from "./Panel";
 import { GrowBar } from "./GrowBar";
 
 const stageColor: Record<string, string> = {
-  New: "var(--accent-soft)",
-  Quoted: "var(--cat-1)",
-  "Follow-up": "var(--cat-4)",
-  Won: "var(--ok)",
-  Dispatched: "var(--cat-3)",
-  Closed: "var(--cat-5)",
-  Lost: "var(--critical)",
+  New: "#86b6ef",
+  Quoted: "#5598e7",
+  "Follow-up": "#3987e5",
+  Won: "#0ca30c",
+  Dispatched: "#199e70",
+  Closed: "#7d8fa3",
+  Lost: "#d03b3b",
 };
 
 export async function PipelineBoard() {
   const stages = await getPipelineStages();
-  // "Delivered" is a running total, not a work-in-progress count — scale the
-  // in-flight stages against each other and cap the bar so one big number
-  // doesn't flatten the rest.
-  const hasTotal = stages.some((s) => s.total);
-  const max = Math.max(...stages.filter((s) => !s.total).map((s) => s.count), 1);
+  const total = stages.reduce((s, x) => s + x.count, 0);
+  const max = Math.max(...stages.map((s) => s.count), 1);
 
   return (
-    <section id="pipeline" className="border-t border-panel-line py-14">
-      <SectionHead
-        eyebrow="Live Pipeline"
-        title="Enquiries by stage, right now."
-        lede="Count of enquiries sitting at each stage of the sales desk — the same board the team works from."
-      />
-
-      <div className="rounded-xl border border-panel-line bg-bg-elevated p-6">
-        <div className="space-y-4">
-          {stages.map((s, i) => {
-            const isDelivered = !!s.total;
-            const pct = isDelivered ? 100 : Math.max(6, (s.count / max) * 100);
-            return (
-              <div key={s.stage} className="flex items-center gap-4">
-                <div className="w-[120px] flex-none text-[0.82rem] font-semibold text-ink-dim sm:w-[150px]">
-                  {s.stage}
-                </div>
-                <div className="relative h-6 flex-1 overflow-hidden rounded-full bg-[color-mix(in_srgb,var(--accent-soft)_12%,transparent)]">
-                  <GrowBar
-                    axis="width"
-                    size={`${pct}%`}
-                    delay={i * 0.05}
-                    className="h-full rounded-full"
-                    style={{ background: stageColor[s.stage] ?? (isDelivered ? "var(--ok)" : "var(--accent)") }}
-                  />
-                </div>
-                <div className="w-[52px] flex-none text-right font-data text-[0.9rem] font-semibold tabular-nums">
-                  {s.count}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        {hasTotal && (
-          <p className="mt-5 text-[0.78rem] text-ink-dim">
-            &ldquo;Delivered&rdquo; counts completed orders this month, shown to scale separately from the in-flight stages above it.
-          </p>
-        )}
+    <Panel title="Pipeline" sub={`${total.toLocaleString("en-IN")} enquiries by stage`}>
+      <div className="space-y-3">
+        {stages.map((s, i) => (
+          <div key={s.stage} className="flex items-center gap-3">
+            <div className="w-[82px] flex-none text-[0.8rem] font-semibold">{s.stage}</div>
+            <div className="relative h-2.5 flex-1 overflow-hidden rounded-full bg-[color-mix(in_srgb,var(--ink)_8%,transparent)]">
+              <GrowBar
+                axis="width"
+                size={`${Math.max(3, (s.count / max) * 100)}%`}
+                delay={i * 0.05}
+                className="h-full rounded-full"
+                style={{ background: stageColor[s.stage] ?? "var(--accent)" }}
+              />
+            </div>
+            <div className="w-[44px] flex-none text-right font-data text-[0.85rem] font-semibold tabular-nums">{s.count.toLocaleString("en-IN")}</div>
+            <div className="hidden w-[36px] flex-none text-right font-data text-[0.72rem] tabular-nums text-ink-dim sm:block">
+              {Math.round((s.count / total) * 100)}%
+            </div>
+          </div>
+        ))}
       </div>
-    </section>
+    </Panel>
   );
 }

@@ -1,36 +1,27 @@
 import { getOrderVolume } from "@/lib/data";
-import { GrowBar } from "./GrowBar";
+import { Panel } from "./Panel";
+import { VolumeChart } from "./VolumeChart";
 
 export async function OrderVolumeChart() {
-  const weeks = await getOrderVolume();
-  const max = Math.max(...weeks.map((w) => w.orders));
-  const chartH = 160;
+  const vol = await getOrderVolume();
+  const data = vol.map((v) => ({ label: v.week, value: v.orders }));
+  const growth = data.length > 1 && data[data.length - 2].value
+    ? Math.round(((data[data.length - 1].value - data[data.length - 2].value) / data[data.length - 2].value) * 100)
+    : null;
 
   return (
-    <div className="rounded-xl border border-panel-line bg-bg-elevated p-6">
-      <h3 className="text-[1rem] font-bold">Enquiry volume over time</h3>
-      <p className="mt-1 text-[0.82rem] text-ink-dim">Enquiries received per period, across all product lines.</p>
-
-      <div className="mt-6 flex items-end gap-3" style={{ height: chartH }}>
-        {weeks.map((w, i) => {
-          const h = Math.max(6, (w.orders / max) * chartH);
-          const isLast = w.week === weeks[weeks.length - 1].week;
-          return (
-            <div key={w.week} className="flex flex-1 flex-col items-center justify-end gap-2">
-              <span className="font-data text-[0.7rem] font-semibold tabular-nums text-ink-dim">
-                {w.orders}
-              </span>
-              <GrowBar
-                axis="height"
-                size={`${h}px`}
-                delay={i * 0.04}
-                className={`w-full rounded-t-[4px] ${isLast ? "bg-accent" : "bg-accent-soft/55"}`}
-              />
-              <span className="font-data text-[0.68rem] text-ink-dim">{w.week}</span>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    <Panel
+      title="Enquiry volume"
+      sub="Enquiries received per month"
+      right={
+        growth !== null && (
+          <span className={`rounded-full px-2.5 py-1 font-data text-[0.72rem] font-semibold ${growth >= 0 ? "bg-[#0ca30c]/15 text-[#3ddc84]" : "bg-[#d03b3b]/15 text-[#ff6b5e]"}`}>
+            {growth >= 0 ? "▲" : "▼"} {Math.abs(growth)}% vs last month
+          </span>
+        )
+      }
+    >
+      <VolumeChart data={data} />
+    </Panel>
   );
 }

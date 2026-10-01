@@ -12,7 +12,7 @@ export async function FocusPanel() {
   const total = f.hot + f.warm + f.cold || 1;
 
   return (
-    <div className="rounded-xl border border-panel-line bg-bg-elevated p-6">
+    <div className="rounded-2xl border border-panel-line bg-bg-elevated p-5">
       <h3 className="text-[1rem] font-bold">Today&apos;s focus</h3>
       <p className="mt-1 text-[0.82rem] text-ink-dim">Open enquiries by priority, and follow-ups that need a call.</p>
 

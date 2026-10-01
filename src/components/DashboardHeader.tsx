@@ -20,7 +20,7 @@ export function DashboardHeader({ live, asOf }: { live: boolean; asOf: string | 
   }, []);
 
   return (
-    <div className="flex flex-wrap items-end justify-between gap-4 pb-6 pt-9">
+    <div className="flex flex-wrap items-end justify-between gap-4 pb-5 pt-6">
       <div>
         <div className="mb-2 flex items-center gap-2 font-data text-[0.72rem] uppercase tracking-[0.14em] text-accent-soft">
           <span
@@ -28,7 +28,7 @@ export function DashboardHeader({ live, asOf }: { live: boolean; asOf: string | 
           />
           {live ? `Live · updated ${asOf}` : "Demo data · live feed pending"}
         </div>
-        <h1 className="text-[clamp(1.6rem,3vw,2.1rem)] font-extrabold">Operations Overview</h1>
+        <h1 className="text-[clamp(1.4rem,2.6vw,1.8rem)] font-extrabold">Sales Desk</h1>
         <p className="mt-1 text-[0.95rem] text-ink-dim">
           Setmi India — a live view of enquiries and the sales desk.
         </p>

@@ -7,14 +7,14 @@ export async function KpiRow() {
   const kpis = await getKpis();
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
       {kpis.map((k, i) => {
         const up = (k.deltaPct ?? 0) >= 0;
         return (
           <Reveal
             key={k.label}
             delay={i * 0.06}
-            className="rounded-xl border border-panel-line bg-bg-elevated p-5"
+            className="rounded-2xl border border-panel-line bg-bg-elevated p-5 shadow-[inset_0_2px_0_0_rgba(76,195,217,0.4)]"
           >
             <div className="text-[0.82rem] text-ink-dim">{k.label}</div>
             <div className="mt-1.5 flex items-baseline gap-2">
