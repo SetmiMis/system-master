@@ -11,6 +11,7 @@ const defaultLinks: NavLink[] = [
   ["Process", "/#process"],
   ["Support", "/#after-sales"],
   ["FAQs", "/#faqs"],
+  ["Get a quote", "/#quote"],
 ];
 
 export function TopBar({ links = defaultLinks }: { links?: NavLink[] }) {

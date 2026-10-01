@@ -5,6 +5,9 @@ import { ProductsSection } from "@/components/ProductsSection";
 import { SystemsSummarySection } from "@/components/SystemsSummarySection";
 import { ProcessSection } from "@/components/ProcessSection";
 import { AfterSalesSection } from "@/components/AfterSalesSection";
+import { WhyChooseSection } from "@/components/WhyChooseSection";
+import { QuoteSection } from "@/components/QuoteSection";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { FaqSection } from "@/components/FaqSection";
 import { DashboardFooter } from "@/components/DashboardFooter";
 
@@ -17,12 +20,15 @@ export default function Home() {
         <HeroOverview />
         <StorySection />
         <ProductsSection />
+        <WhyChooseSection />
         <SystemsSummarySection />
         <ProcessSection />
         <AfterSalesSection />
         <FaqSection />
+        <QuoteSection />
         <DashboardFooter />
       </main>
+      <WhatsAppButton />
     </>
   );
 }
