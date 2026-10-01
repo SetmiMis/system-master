@@ -28,7 +28,7 @@ export function DashboardHeader() {
         </div>
         <h1 className="text-[clamp(1.6rem,3vw,2.1rem)] font-extrabold">Operations Overview</h1>
         <p className="mt-1 text-[0.95rem] text-ink-dim">
-          Setmi India — live view of orders, inventory, and quality across the desk.
+          Setmi India — live view of enquiries and the sales desk.
         </p>
       </div>
       <div className="rounded-lg border border-panel-line bg-bg-elevated px-4 py-2.5 text-right">

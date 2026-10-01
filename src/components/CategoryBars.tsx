@@ -10,8 +10,8 @@ export async function CategoryBars() {
 
   return (
     <div className="rounded-xl border border-panel-line bg-bg-elevated p-6">
-      <h3 className="text-[1rem] font-bold">Orders by connector category</h3>
-      <p className="mt-1 text-[0.82rem] text-ink-dim">Share of this month&apos;s {total} orders, by product line.</p>
+      <h3 className="text-[1rem] font-bold">Enquiries by source</h3>
+      <p className="mt-1 text-[0.82rem] text-ink-dim">Share of {total} enquiries, by where they came from.</p>
 
       <div className="mt-6 space-y-3.5">
         {cats.map((c, i) => (
@@ -33,7 +33,7 @@ export async function CategoryBars() {
               />
             </div>
             <div className="w-[34px] flex-none text-right font-data text-[0.85rem] font-semibold tabular-nums">
-              {c.value}%
+              {Math.round((c.value / total) * 100)}%
             </div>
           </div>
         ))}

@@ -6,11 +6,12 @@ export type Kpi = {
   label: string;
   value: number;
   suffix?: string;
-  deltaPct: number;
-  spark: number[];
+  deltaPct?: number;
+  spark?: number[];
 };
 
-export type PipelineStage = { stage: string; count: number };
+export type PipelineStage = { stage: string; count: number; total?: boolean };
+export type StateEnquiries = { state: string; iso: string; count: number; lat: number | null; lng: number | null };
 export type WeekVolume = { week: string; orders: number };
 export type CategorySlice = { name: string; value: number };
 export type SystemStatus = {
@@ -21,7 +22,52 @@ export type SystemStatus = {
 };
 export type ActivityEvent = { id: number; text: string; minsAgo: number };
 
+// Live counts from the E2O FMS Apps Script (PublicMetrics.js) — counts only, no customer data.
+// Set E2O_METRICS_URL (web app /exec URL) and E2O_METRICS_KEY in Vercel; unset or failing => mock data below.
+type Metrics = {
+  asOf: string;
+  openEnquiries: number;
+  wonThisMonth: number;
+  winRate: number;
+  overdueFollowUps: number;
+  funnel: Record<string, number>;
+  sources: { labels: string[]; data: number[] };
+  months: { categories: string[]; data: number[] };
+  states: StateEnquiries[];
+};
+
+async function loadMetrics(): Promise<Metrics | null> {
+  const url = process.env.E2O_METRICS_URL;
+  const key = process.env.E2O_METRICS_KEY;
+  if (!url || !key) return null;
+  try {
+    const res = await fetch(`${url}?page=metrics&key=${encodeURIComponent(key)}`, { next: { revalidate: 300 } });
+    if (!res.ok) return null;
+    const m = await res.json();
+    return m.error ? null : (m as Metrics);
+  } catch {
+    return null;
+  }
+}
+
+export async function getMetricsAsOf(): Promise<string | null> {
+  return (await loadMetrics())?.asOf ?? null;
+}
+
+export async function getIndiaStates(): Promise<StateEnquiries[]> {
+  return (await loadMetrics())?.states ?? [];
+}
+
 export async function getKpis(): Promise<Kpi[]> {
+  const m = await loadMetrics();
+  if (m) {
+    return [
+      { label: "Open enquiries", value: m.openEnquiries },
+      { label: "Won this month", value: m.wonThisMonth },
+      { label: "Win rate", value: m.winRate, suffix: "%" },
+      { label: "Overdue follow-ups", value: m.overdueFollowUps },
+    ];
+  }
   // ponytail: mock data, replace with a call to your order/inventory system
   return [
     { label: "Open orders", value: 47, deltaPct: 8.2, spark: [30, 34, 33, 38, 41, 39, 44, 47] },
@@ -32,6 +78,10 @@ export async function getKpis(): Promise<Kpi[]> {
 }
 
 export async function getPipelineStages(): Promise<PipelineStage[]> {
+  const m = await loadMetrics();
+  if (m) {
+    return ["New", "Quoted", "Follow-up", "Won", "Dispatched", "Closed", "Lost"].map((stage) => ({ stage, count: m.funnel[stage] ?? 0 }));
+  }
   return [
     { stage: "Enquiry", count: 18 },
     { stage: "Vetting", count: 14 },
@@ -39,11 +89,13 @@ export async function getPipelineStages(): Promise<PipelineStage[]> {
     { stage: "Production", count: 22 },
     { stage: "Quality Check", count: 9 },
     { stage: "Dispatch", count: 15 },
-    { stage: "Delivered", count: 340 },
+    { stage: "Delivered", count: 340, total: true },
   ];
 }
 
 export async function getOrderVolume(): Promise<WeekVolume[]> {
+  const m = await loadMetrics();
+  if (m) return m.months.categories.map((week, i) => ({ week, orders: m.months.data[i] }));
   return [
     { week: "W1", orders: 72 },
     { week: "W2", orders: 81 },
@@ -57,6 +109,13 @@ export async function getOrderVolume(): Promise<WeekVolume[]> {
 }
 
 export async function getCategoryBreakdown(): Promise<CategorySlice[]> {
+  const m = await loadMetrics();
+  if (m) {
+    return m.sources.labels
+      .map((name, i) => ({ name, value: m.sources.data[i] }))
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 6);
+  }
   return [
     { name: "GX Series", value: 32 },
     { name: "UHF Series", value: 24 },

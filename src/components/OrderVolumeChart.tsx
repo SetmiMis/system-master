@@ -8,8 +8,8 @@ export async function OrderVolumeChart() {
 
   return (
     <div className="rounded-xl border border-panel-line bg-bg-elevated p-6">
-      <h3 className="text-[1rem] font-bold">Order volume, last 8 weeks</h3>
-      <p className="mt-1 text-[0.82rem] text-ink-dim">Orders placed per week, across all product lines.</p>
+      <h3 className="text-[1rem] font-bold">Enquiry volume over time</h3>
+      <p className="mt-1 text-[0.82rem] text-ink-dim">Enquiries received per period, across all product lines.</p>
 
       <div className="mt-6 flex items-end gap-3" style={{ height: chartH }}>
         {weeks.map((w, i) => {

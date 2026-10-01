@@ -3,6 +3,7 @@ import { DashboardHeader } from "@/components/DashboardHeader";
 import { KpiRow } from "@/components/KpiRow";
 import { PipelineBoard } from "@/components/PipelineBoard";
 import { ChartsRow } from "@/components/ChartsRow";
+import { IndiaMapSection } from "@/components/IndiaMapSection";
 import { SystemsGrid } from "@/components/SystemsGrid";
 import { OpsRow } from "@/components/OpsRow";
 import { DashboardFooter } from "@/components/DashboardFooter";
@@ -23,6 +24,7 @@ export default function DashboardPage() {
         <KpiRow />
         <PipelineBoard />
         <ChartsRow />
+        <IndiaMapSection />
         <SystemsGrid />
         <OpsRow />
         <DashboardFooter />

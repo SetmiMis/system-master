@@ -7,21 +7,21 @@ export async function PipelineBoard() {
   // "Delivered" is a running total, not a work-in-progress count — scale the
   // in-flight stages against each other and cap the bar so one big number
   // doesn't flatten the rest.
-  const inFlight = stages.slice(0, -1);
-  const max = Math.max(...inFlight.map((s) => s.count));
+  const hasTotal = stages.some((s) => s.total);
+  const max = Math.max(...stages.filter((s) => !s.total).map((s) => s.count), 1);
 
   return (
     <section id="pipeline" className="border-t border-panel-line py-14">
       <SectionHead
         eyebrow="Live Pipeline"
-        title="Orders in flight, right now."
-        lede="Count of active orders sitting at each stage of the desk — this is the same board the order team looks at."
+        title="Enquiries by stage, right now."
+        lede="Count of enquiries sitting at each stage of the sales desk — the same board the team works from."
       />
 
       <div className="rounded-xl border border-panel-line bg-bg-elevated p-6">
         <div className="space-y-4">
           {stages.map((s, i) => {
-            const isDelivered = i === stages.length - 1;
+            const isDelivered = !!s.total;
             const pct = isDelivered ? 100 : Math.max(6, (s.count / max) * 100);
             return (
               <div key={s.stage} className="flex items-center gap-4">
@@ -43,9 +43,11 @@ export async function PipelineBoard() {
             );
           })}
         </div>
-        <p className="mt-5 text-[0.78rem] text-ink-dim">
-          &ldquo;Delivered&rdquo; counts completed orders this month, shown to scale separately from the in-flight stages above it.
-        </p>
+        {hasTotal && (
+          <p className="mt-5 text-[0.78rem] text-ink-dim">
+            &ldquo;Delivered&rdquo; counts completed orders this month, shown to scale separately from the in-flight stages above it.
+          </p>
+        )}
       </div>
     </section>
   );

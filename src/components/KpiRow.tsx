@@ -9,7 +9,7 @@ export async function KpiRow() {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {kpis.map((k, i) => {
-        const up = k.deltaPct >= 0;
+        const up = (k.deltaPct ?? 0) >= 0;
         return (
           <Reveal
             key={k.label}
@@ -21,17 +21,21 @@ export async function KpiRow() {
               <span className="font-data text-[1.9rem] font-bold tabular-nums">
                 <StatCounter value={String(k.value)} suffix={k.suffix} />
               </span>
-              <span
-                className={`font-data text-[0.78rem] font-semibold ${
-                  up ? "text-ok" : "text-accent"
-                }`}
-              >
-                {up ? "▲" : "▼"} {Math.abs(k.deltaPct)}%
-              </span>
+              {k.deltaPct !== undefined && (
+                <span
+                  className={`font-data text-[0.78rem] font-semibold ${
+                    up ? "text-ok" : "text-accent"
+                  }`}
+                >
+                  {up ? "▲" : "▼"} {Math.abs(k.deltaPct)}%
+                </span>
+              )}
             </div>
-            <div className="mt-3">
-              <Sparkline values={k.spark} color="var(--accent-soft)" />
-            </div>
+            {k.spark && (
+              <div className="mt-3">
+                <Sparkline values={k.spark} color="var(--accent-soft)" />
+              </div>
+            )}
           </Reveal>
         );
       })}
