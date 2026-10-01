@@ -18,8 +18,13 @@ const defaultLinks: NavLink[] = [
   ["Get a quote", "/#quote"],
 ];
 
+// Desktop shows a short one-line nav; the hamburger keeps every link.
+const compact = new Set(["Overview", "Story", "Systems", "Support", "Get a quote"]);
+
 export function TopBar({ links = defaultLinks }: { links?: NavLink[] }) {
   const allLinks: NavLink[] = [...links, ["Dashboard", "/dashboard"], ["Admin", "/admin"]];
+  const isMain = links === defaultLinks;
+  const desktopLinks = isMain ? links.filter(([l]) => !compact.has(l)) : links;
 
   return (
     <header className="header-gradient sticky top-0 z-40 shadow-[0_2px_14px_rgba(1,53,86,0.25)]">
@@ -34,8 +39,8 @@ export function TopBar({ links = defaultLinks }: { links?: NavLink[] }) {
             priority
           />
         </a>
-        <nav className="hidden flex-wrap justify-center gap-x-5 gap-y-1 2xl:flex">
-          {links.map(([label, href]) => (
+        <nav className="hidden flex-nowrap items-center justify-center gap-x-5 whitespace-nowrap xl:flex">
+          {desktopLinks.map(([label, href]) => (
             <MotionLink
               key={href}
               href={href}
@@ -45,7 +50,15 @@ export function TopBar({ links = defaultLinks }: { links?: NavLink[] }) {
             </MotionLink>
           ))}
         </nav>
-        <div className="hidden flex-none items-center gap-4 2xl:flex">
+        <div className="hidden flex-none items-center gap-4 xl:flex">
+          {isMain && (
+            <MotionLink
+              href="/#quote"
+              className="rounded-md bg-[#2fb6a1] px-3.5 py-1.5 text-[0.8rem] font-bold text-[#06201c] hover:bg-[#3cc8b2]"
+            >
+              Get a quote
+            </MotionLink>
+          )}
           <MotionLink href="/dashboard" className="text-[0.82rem] font-semibold text-white/80 hover:text-white">
             Dashboard
           </MotionLink>
@@ -57,7 +70,7 @@ export function TopBar({ links = defaultLinks }: { links?: NavLink[] }) {
           </MotionLink>
         </div>
 
-        <details className="group relative flex-none 2xl:hidden">
+        <details className="group relative flex-none xl:hidden">
           <summary className="flex h-9 w-9 cursor-pointer list-none items-center justify-center rounded-md border border-white/25 text-white">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-5 w-5 group-open:hidden">
               <path d="M4 6h16M4 12h16M4 18h16" strokeLinecap="round" />
