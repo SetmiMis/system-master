@@ -9,6 +9,7 @@ import { ShopSection } from "@/components/ShopSection";
 import { VideosSection } from "@/components/VideosSection";
 import { ReviewsSection } from "@/components/ReviewsSection";
 import { getReviews } from "@/lib/reviews";
+import { TickerBar } from "@/components/TickerBar";
 import { WhyChooseSection } from "@/components/WhyChooseSection";
 import { QuoteSection } from "@/components/QuoteSection";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
@@ -21,6 +22,17 @@ export default async function Home() {
     <>
       <div className="grid-field" />
       <TopBar />
+      <TickerBar
+        items={[
+          `★ ${reviews.rating} on Google · ${reviews.count} reviews`,
+          "ISO 9001:2015 Certified",
+          "Serving since 1983",
+          "Pan-India dispatch",
+          "RF connectors · AV cables · Multimedia hardware",
+          "7-day replacement",
+          "Call +91 85868 78111",
+        ]}
+      />
       <main className="mx-auto max-w-[1180px] px-6">
         <HeroOverview rating={`★ ${reviews.rating} on Google · ${reviews.count} reviews`} />
         <StorySection />
