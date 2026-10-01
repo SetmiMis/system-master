@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { SectionHead } from "./SectionHead";
+import { LottieIcon } from "./LottieIcon";
 
 const WA = "918586878111";
 const series = ["GX Series", "UHF Series", "SMA Series", "BNC Series", "Circular & Waterproof", "Cables, Splitters & Plugs", "Custom / not sure"];
@@ -8,11 +10,13 @@ const field =
   "w-full rounded-lg border border-panel-line bg-bg px-3.5 py-2.5 text-[0.92rem] outline-none focus:border-accent focus:ring-2 focus:ring-accent-soft/30";
 
 export function QuoteSection() {
+  const [sent, setSent] = useState(false);
   function send(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
     const text = `Hi Setmi India, I'd like a quote.\nName: ${f.get("name")}\nCompany: ${f.get("company")}\nProduct: ${f.get("series")}\nQuantity: ${f.get("qty")}\nDetails: ${f.get("notes")}`;
     window.open(`https://wa.me/${WA}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+    setSent(true);
   }
 
   return (
@@ -40,6 +44,12 @@ export function QuoteSection() {
         <p className="text-[0.78rem] text-ink-dim sm:col-span-2">
           Opens WhatsApp with your details filled in.
         </p>
+        {sent && (
+          <div className="flex items-center gap-2 text-[0.88rem] font-semibold text-ok sm:col-span-2" role="status">
+            <LottieIcon name="success" loop={false} className="h-10 w-10" />
+            Enquiry ready — complete sending it in WhatsApp.
+          </div>
+        )}
       </form>
       <div className="mt-6 grid max-w-[720px] gap-3 text-[0.9rem] text-ink-dim sm:grid-cols-2">
         <div>

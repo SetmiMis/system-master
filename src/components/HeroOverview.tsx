@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { MotionLink } from "./MotionLink";
+import { LottieIcon } from "./LottieIcon";
 
 const U = "https://setmiindia.com/wp-content/uploads";
 const cards = [
@@ -123,6 +124,9 @@ export function HeroOverview({ rating }: { rating: string }) {
           ))}
         </div>
       </div>
+      <a href="#story" aria-label="Scroll to story" className="absolute bottom-3 left-1/2 hidden -translate-x-1/2 invert sm:block">
+        <LottieIcon name="scroll" className="h-12 w-12 opacity-80" />
+      </a>
     </section>
   );
 }

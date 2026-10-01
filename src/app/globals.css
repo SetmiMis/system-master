@@ -205,3 +205,8 @@ h1, h2, h3 {
 .theme-dark .leaflet-tile {
   filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9);
 }
+
+/* Lenis smooth scroll */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }

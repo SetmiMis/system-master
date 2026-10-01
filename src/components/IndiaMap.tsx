@@ -43,7 +43,7 @@ export function IndiaMap({ states }: { states: StateEnquiries[] }) {
   return (
     <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1.6fr_1fr]">
       <div ref={el} className="h-[380px] overflow-hidden rounded-xl border border-panel-line bg-bg-elevated" />
-      <div className="max-h-[380px] overflow-auto rounded-xl border border-panel-line bg-bg-elevated p-5">
+      <div data-lenis-prevent className="max-h-[380px] overflow-auto rounded-xl border border-panel-line bg-bg-elevated p-5">
         <div className="mb-3 flex items-baseline justify-between text-[0.8rem] text-ink-dim">
           <span>{picked ? `Filtered: ${picked}` : "All states"}</span>
           {picked && (
