@@ -22,8 +22,6 @@ export function CertificationsSection() {
             <dd className="font-data font-semibold">IN/66820947/4632</dd>
             <dt className="text-ink-dim">Issued</dt>
             <dd className="font-semibold">15 Oct 2025</dd>
-            <dt className="text-ink-dim">Valid until</dt>
-            <dd className="font-semibold">14 Oct 2028</dd>
           </dl>
           <a href="/iso-9001-certificate.pdf" target="_blank" rel="noopener" className="mt-4 block overflow-hidden rounded-lg border border-panel-line bg-white">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -48,6 +46,27 @@ export function CertificationsSection() {
             Government departments and PSUs can buy Setmi India products directly through GeM — efficient, transparent, inclusive.
           </p>
         </RevealCard>
+      </div>
+
+      <div className="mt-8">
+        <div className="mb-3 text-[0.72rem] uppercase tracking-[0.06em] text-accent-strong">Also find us on</div>
+        <div className="flex flex-wrap gap-3">
+          {[
+            ["Amazon.in", "https://www.amazon.in/stores/SetmiIndia/page/0A46CD60-B6C5-4476-BD1D-01F0AC3DE15B"],
+            ["IndustryBuying", "https://www.industrybuying.com/brands/setmi-india-26440/it-security-3369/networking-connecters-14410"],
+            ["GeM", "https://gem.gov.in"],
+          ].map(([name, href]) => (
+            <a
+              key={name}
+              href={href}
+              target="_blank"
+              rel="noopener"
+              className="rounded-full border border-panel-line bg-bg-elevated px-5 py-2 text-[0.88rem] font-semibold transition-colors hover:border-accent hover:text-accent"
+            >
+              {name} →
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   );

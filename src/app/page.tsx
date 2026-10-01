@@ -29,6 +29,7 @@ export default async function Home() {
           "ISO 9001:2015 Certified",
           "Serving since 1983",
           "Registered seller on GeM",
+          "Also on Amazon & IndustryBuying",
           "Pan-India dispatch",
           "RF connectors · AV cables · Multimedia hardware",
           "7-day replacement",
