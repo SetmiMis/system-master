@@ -1,3 +1,4 @@
+import { getMetricsAsOf } from "@/lib/data";
 import { TopBar } from "@/components/TopBar";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { KpiRow } from "@/components/KpiRow";
@@ -8,9 +9,10 @@ import { SystemsGrid } from "@/components/SystemsGrid";
 import { OpsRow } from "@/components/OpsRow";
 import { DashboardFooter } from "@/components/DashboardFooter";
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const asOf = await getMetricsAsOf();
   return (
-    <>
+    <div className="theme-dark isolate min-h-screen">
       <div className="grid-field" />
       <TopBar
         links={[
@@ -20,7 +22,7 @@ export default function DashboardPage() {
         ]}
       />
       <main className="mx-auto max-w-[1180px] px-6">
-        <DashboardHeader />
+        <DashboardHeader live={asOf !== null} asOf={asOf} />
         <KpiRow />
         <PipelineBoard />
         <ChartsRow />
@@ -29,6 +31,6 @@ export default function DashboardPage() {
         <OpsRow />
         <DashboardFooter />
       </main>
-    </>
+    </div>
   );
 }

@@ -183,3 +183,25 @@ h1, h2, h3 {
 @keyframes marquee {
   to { transform: translateX(-50%); }
 }
+
+/* Dashboard "control room" theme — re-themes every token-based component */
+.theme-dark {
+  --bg: #0b1625;
+  --bg-elevated: #112238;
+  --ink: #e8f1f8;
+  --ink-dim: #9db2c6;
+  --panel-line: rgba(255, 255, 255, 0.1);
+  --grid-line: rgba(255, 255, 255, 0.045);
+  --accent: #2fb6a1;
+  --accent-strong: #5fd6c3;
+  --accent-soft: #4cc3d9;
+  --ok: #3ddc84;
+  --critical: #ff6b5e;
+  color-scheme: dark;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.theme-dark .leaflet-tile {
+  filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9);
+}

@@ -2,6 +2,16 @@ import { getPipelineStages } from "@/lib/data";
 import { SectionHead } from "./SectionHead";
 import { GrowBar } from "./GrowBar";
 
+const stageColor: Record<string, string> = {
+  New: "var(--accent-soft)",
+  Quoted: "var(--cat-1)",
+  "Follow-up": "var(--cat-4)",
+  Won: "var(--ok)",
+  Dispatched: "var(--cat-3)",
+  Closed: "var(--cat-5)",
+  Lost: "var(--critical)",
+};
+
 export async function PipelineBoard() {
   const stages = await getPipelineStages();
   // "Delivered" is a running total, not a work-in-progress count — scale the
@@ -33,7 +43,8 @@ export async function PipelineBoard() {
                     axis="width"
                     size={`${pct}%`}
                     delay={i * 0.05}
-                    className={`h-full rounded-full ${isDelivered ? "bg-ok" : "bg-accent"}`}
+                    className="h-full rounded-full"
+                    style={{ background: stageColor[s.stage] ?? (isDelivered ? "var(--ok)" : "var(--accent)") }}
                   />
                 </div>
                 <div className="w-[52px] flex-none text-right font-data text-[0.9rem] font-semibold tabular-nums">

@@ -30,6 +30,8 @@ type Metrics = {
   wonThisMonth: number;
   winRate: number;
   overdueFollowUps: number;
+  dueToday: number;
+  priorities: { hot: number; warm: number; cold: number };
   funnel: Record<string, number>;
   sources: { labels: string[]; data: number[] };
   months: { categories: string[]; data: number[] };
@@ -54,8 +56,30 @@ export async function getMetricsAsOf(): Promise<string | null> {
   return (await loadMetrics())?.asOf ?? null;
 }
 
+export type Focus = { hot: number; warm: number; cold: number; overdue: number; dueToday: number };
+
+export async function getFocus(): Promise<Focus> {
+  const m = await loadMetrics();
+  if (m) return { ...m.priorities, overdue: m.overdueFollowUps, dueToday: m.dueToday };
+  return { hot: 14, warm: 22, cold: 11, overdue: 9, dueToday: 6 };
+}
+
+// ponytail: sample states shown (badged "Demo data") until the E2O feed is connected.
+const demoStates: StateEnquiries[] = [
+  { state: "Delhi", iso: "IN-DL", count: 412, lat: 28.6, lng: 77.2 },
+  { state: "Maharashtra", iso: "IN-MH", count: 268, lat: 19.7, lng: 75.7 },
+  { state: "Gujarat", iso: "IN-GJ", count: 190, lat: 22.3, lng: 71.2 },
+  { state: "Karnataka", iso: "IN-KA", count: 150, lat: 15.3, lng: 75.7 },
+  { state: "Tamil Nadu", iso: "IN-TN", count: 132, lat: 11.1, lng: 78.7 },
+  { state: "Uttar Pradesh", iso: "IN-UP", count: 120, lat: 26.8, lng: 80.9 },
+  { state: "Rajasthan", iso: "IN-RJ", count: 96, lat: 27.0, lng: 74.2 },
+  { state: "West Bengal", iso: "IN-WB", count: 74, lat: 22.9, lng: 87.8 },
+  { state: "Telangana", iso: "IN-TG", count: 70, lat: 18.1, lng: 79.0 },
+  { state: "Haryana", iso: "IN-HR", count: 64, lat: 29.0, lng: 76.1 },
+];
+
 export async function getIndiaStates(): Promise<StateEnquiries[]> {
-  return (await loadMetrics())?.states ?? [];
+  return (await loadMetrics())?.states ?? demoStates;
 }
 
 export async function getKpis(): Promise<Kpi[]> {
@@ -70,10 +94,10 @@ export async function getKpis(): Promise<Kpi[]> {
   }
   // ponytail: mock data, replace with a call to your order/inventory system
   return [
-    { label: "Open orders", value: 47, deltaPct: 8.2, spark: [30, 34, 33, 38, 41, 39, 44, 47] },
-    { label: "Dispatched this week", value: 112, deltaPct: 4.1, spark: [80, 88, 95, 90, 101, 98, 108, 112] },
-    { label: "Quality pass rate", value: 99.2, suffix: "%", deltaPct: 0.3, spark: [98.6, 98.8, 98.9, 99.0, 99.1, 99.0, 99.2, 99.2] },
-    { label: "Avg. dispatch time", value: 2.4, suffix: "d", deltaPct: -6.5, spark: [3.1, 3.0, 2.9, 2.8, 2.6, 2.5, 2.5, 2.4] },
+    { label: "Open enquiries", value: 47, deltaPct: 8.2, spark: [30, 34, 33, 38, 41, 39, 44, 47] },
+    { label: "Won this month", value: 12, deltaPct: 4.1, spark: [6, 7, 9, 8, 10, 9, 11, 12] },
+    { label: "Win rate", value: 18, suffix: "%", deltaPct: 1.3, spark: [14, 15, 15, 16, 17, 17, 18, 18] },
+    { label: "Overdue follow-ups", value: 9, deltaPct: -6.5, spark: [15, 14, 13, 12, 12, 11, 10, 9] },
   ];
 }
 
@@ -83,13 +107,13 @@ export async function getPipelineStages(): Promise<PipelineStage[]> {
     return ["New", "Quoted", "Follow-up", "Won", "Dispatched", "Closed", "Lost"].map((stage) => ({ stage, count: m.funnel[stage] ?? 0 }));
   }
   return [
-    { stage: "Enquiry", count: 18 },
-    { stage: "Vetting", count: 14 },
-    { stage: "Quotation", count: 11 },
-    { stage: "Production", count: 22 },
-    { stage: "Quality Check", count: 9 },
-    { stage: "Dispatch", count: 15 },
-    { stage: "Delivered", count: 340, total: true },
+    { stage: "New", count: 38 },
+    { stage: "Quoted", count: 26 },
+    { stage: "Follow-up", count: 31 },
+    { stage: "Won", count: 12 },
+    { stage: "Dispatched", count: 9 },
+    { stage: "Closed", count: 44 },
+    { stage: "Lost", count: 61 },
   ];
 }
 
@@ -97,14 +121,12 @@ export async function getOrderVolume(): Promise<WeekVolume[]> {
   const m = await loadMetrics();
   if (m) return m.months.categories.map((week, i) => ({ week, orders: m.months.data[i] }));
   return [
-    { week: "W1", orders: 72 },
-    { week: "W2", orders: 81 },
-    { week: "W3", orders: 76 },
-    { week: "W4", orders: 89 },
-    { week: "W5", orders: 94 },
-    { week: "W6", orders: 88 },
-    { week: "W7", orders: 101 },
-    { week: "W8", orders: 112 },
+    { week: "Apr 2026", orders: 212 },
+    { week: "May 2026", orders: 268 },
+    { week: "Jun 2026", orders: 301 },
+    { week: "Jul 2026", orders: 355 },
+    { week: "Aug 2026", orders: 412 },
+    { week: "Sep 2026", orders: 487 },
   ];
 }
 
@@ -117,12 +139,12 @@ export async function getCategoryBreakdown(): Promise<CategorySlice[]> {
       .slice(0, 6);
   }
   return [
-    { name: "GX Series", value: 32 },
-    { name: "UHF Series", value: 24 },
-    { name: "SMA Series", value: 19 },
-    { name: "BNC Series", value: 15 },
-    { name: "MC4 & Circular", value: 7 },
-    { name: "Other", value: 3 },
+    { name: "WhatsApp", value: 34 },
+    { name: "Meta Ads", value: 26 },
+    { name: "IndiaMART", value: 18 },
+    { name: "Walk-in", value: 12 },
+    { name: "Exhibition", value: 6 },
+    { name: "Other", value: 4 },
   ];
 }
 
