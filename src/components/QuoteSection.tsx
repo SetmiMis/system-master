@@ -38,9 +38,32 @@ export function QuoteSection() {
           Send enquiry on WhatsApp
         </button>
         <p className="text-[0.78rem] text-ink-dim sm:col-span-2">
-          Opens WhatsApp with your details filled in. Prefer a call? +91 85868 78111
+          Opens WhatsApp with your details filled in.
         </p>
       </form>
+      <div className="mt-6 grid max-w-[720px] gap-3 text-[0.9rem] text-ink-dim sm:grid-cols-2">
+        <div>
+          <div className="font-semibold text-ink">Visit our store</div>
+          167-168, Old Lajpat Rai Market, Opposite Red Fort (Chandni Chowk), Delhi-110006
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=Setmi+India+Old+Lajpat+Rai+Market+Delhi"
+            target="_blank"
+            rel="noopener"
+            className="mt-1 block font-semibold text-accent hover:underline"
+          >
+            Open in Google Maps →
+          </a>
+        </div>
+        <div>
+          <div className="font-semibold text-ink">Call or write</div>
+          <a href="tel:+918586878111" className="block hover:text-accent">+91 85868 78111</a>
+          <a href="tel:+911147414746" className="block hover:text-accent">+91 11 47414746</a>
+          <a href="mailto:info@setmiindia.com" className="block hover:text-accent">info@setmiindia.com</a>
+          <a href="https://setmiindia.com" target="_blank" rel="noopener" className="mt-1 block font-semibold text-accent hover:underline">
+            Browse the full catalogue →
+          </a>
+        </div>
+      </div>
     </section>
   );
 }

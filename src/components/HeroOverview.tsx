@@ -18,7 +18,7 @@ export function HeroOverview() {
           transition={{ duration: 0.5 }}
           className="relative mb-5 flex flex-wrap gap-2.5"
         >
-          {["ISO 9001:2015 Certified", "Serving since 1983", "Pan-India Dispatch"].map((b) => (
+          {["ISO 9001:2015 Certified", "Serving since 1983", "Pan-India Dispatch", "★ 4.5+ on Google · 87 reviews"].map((b) => (
             <span
               key={b}
               className="inline-flex items-center gap-1.5 rounded-full border border-panel-line bg-bg-elevated px-3.5 py-1.5 text-[0.72rem] font-semibold uppercase tracking-[0.06em] text-ink-dim"

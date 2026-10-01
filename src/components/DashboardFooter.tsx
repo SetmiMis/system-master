@@ -7,7 +7,8 @@ export function DashboardFooter() {
         </div>
         <div className="flex flex-wrap gap-5 font-data text-[0.82rem]">
           <span>+91 85868 78111</span>
-          <span>setmiindia.com</span>
+          <a href="mailto:info@setmiindia.com">info@setmiindia.com</a>
+          <a href="https://setmiindia.com" target="_blank" rel="noopener">setmiindia.com</a>
           <span>Serving since 1983</span>
         </div>
       </div>
