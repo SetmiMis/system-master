@@ -7,6 +7,7 @@ import { ProcessSection } from "@/components/ProcessSection";
 import { AfterSalesSection } from "@/components/AfterSalesSection";
 import { ConnectorSection } from "@/components/ConnectorSection";
 import { ShopSection } from "@/components/ShopSection";
+import { ExpoSection } from "@/components/ExpoSection";
 import { VideosSection } from "@/components/VideosSection";
 import { ReviewsSection } from "@/components/ReviewsSection";
 import { getReviews } from "@/lib/reviews";
@@ -48,6 +49,7 @@ export default async function Home() {
         <WhyChooseSection />
         <CertificationsSection />
         <ReviewsSection data={reviews} />
+        <ExpoSection />
         <VideosSection />
         <SystemsSummarySection />
         <ProcessSection />

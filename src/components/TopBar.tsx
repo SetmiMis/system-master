@@ -10,6 +10,7 @@ const defaultLinks: NavLink[] = [
   ["Shop", "/#shop"],
   ["Certified", "/#certifications"],
   ["Reviews", "/#reviews"],
+  ["Expo", "/#expo"],
   ["Videos", "/#videos"],
   ["Systems", "/#systems"],
   ["Process", "/#process"],
@@ -19,7 +20,7 @@ const defaultLinks: NavLink[] = [
 ];
 
 // Desktop shows a short one-line nav; the hamburger keeps every link.
-const compact = new Set(["Overview", "Story", "Systems", "Support", "Get a quote"]);
+const compact = new Set(["Expo", "Overview", "Story", "Systems", "Support", "Get a quote"]);
 
 export function TopBar({ links = defaultLinks }: { links?: NavLink[] }) {
   const allLinks: NavLink[] = [...links, ["Dashboard", "/dashboard"], ["Admin", "/admin"]];
