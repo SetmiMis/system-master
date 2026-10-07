@@ -32,6 +32,7 @@ export const systems: System[] = [
     description: "Order management system — the desk this dashboard reflects.",
     url: "https://setmi-oms.vercel.app",
     group: "Sales & Orders",
+    public: false,
   },
   {
     name: "Purchase FMS",
@@ -44,12 +45,14 @@ export const systems: System[] = [
     description: "Production planning and shop-floor tracking.",
     url: "https://erp-manufacturing-frontend.vercel.app",
     group: "Purchase & Production",
+    public: false,
   },
   {
     name: "Staff Attendance",
     description: "Attendance and shift tracking for floor staff.",
     url: "https://staff-attendance-ten.vercel.app",
     group: "People & Tasks",
+    public: false,
   },
   {
     name: "Work Checklist",
