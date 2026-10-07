@@ -16,6 +16,7 @@ export type Kpi = {
 export type WeekVolume = { week: string; orders: number };
 export type StateEnquiries = { state: string; iso: string; count: number; lat: number | null; lng: number | null };
 export type DemandItem = { name: string; count: number };
+export type MapPoint = { lat: number; lng: number; count: number };
 export type SystemStatus = {
   title: string;
   body: string;
@@ -33,6 +34,7 @@ type Metrics = {
   months: { categories: string[]; data: number[] };
   demand: DemandItem[];
   states: StateEnquiries[];
+  points?: MapPoint[];
 };
 
 async function loadMetrics(): Promise<Metrics | null> {
@@ -81,6 +83,12 @@ export async function getIndiaStates(): Promise<StateEnquiries[]> {
   return (await loadMetrics())?.states ?? demoStates;
 }
 
+export async function getMapPoints(): Promise<MapPoint[]> {
+  const m = await loadMetrics();
+  if (m) return m.points ?? [];
+  return demoStates.filter((s) => s.lat != null).map((s) => ({ lat: s.lat!, lng: s.lng!, count: s.count }));
+}
+
 export async function getOrderVolume(): Promise<WeekVolume[]> {
   const months = (await loadMetrics())?.months ?? demoMonths;
   return months.categories.map((week, i) => ({ week, orders: months.data[i] }));
@@ -99,7 +107,7 @@ export async function getKpis(): Promise<Kpi[]> {
   return [
     { label: "Customers served", value: m?.customers ?? 2069 },
     { label: "Enquiries this month", value: m?.enquiriesThisMonth ?? months.data[n - 1], deltaPct: delta, spark: months.data },
-    { label: "Calls & follow-ups this month", value: m ? m.callsThisMonth + m.followUpsThisMonth : 1184 },
+    { label: "Total enquiries", value: m?.enquiriesTotal ?? 3474 },
     { label: `Google rating · ${r.count} reviews`, value: r.rating, suffix: "★" },
   ];
 }
