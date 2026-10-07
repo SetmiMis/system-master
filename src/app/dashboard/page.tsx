@@ -20,6 +20,7 @@ export default async function DashboardPage() {
           ["Home", "/"],
           ["Trends", "#trends"],
           ["Map", "#map"],
+          ["Systems", "/systems"],
         ]}
       />
       <main className="mx-auto w-full max-w-[1280px] px-4 pb-6 sm:px-6">

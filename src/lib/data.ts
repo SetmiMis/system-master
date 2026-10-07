@@ -282,6 +282,7 @@ export async function getFaqs(): Promise<FaqItem[]> {
 }
 
 export async function getLinkedSystems(): Promise<LinkedSystem[]> {
+  // To add a system: append { name, description (bio), url, status } below — it appears on /admin (hub) and /systems (public cards).
   // ponytail: real deployment URLs, pulled from the team's Vercel projects.
   // All sit behind Vercel's own sign-in (SSO protection) until a custom
   // domain is attached — that's why "operational" here means "deployed and

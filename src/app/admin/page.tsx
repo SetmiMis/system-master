@@ -19,7 +19,7 @@ export default async function AdminPage() {
           </div>
           <h1 className="text-[clamp(1.6rem,3vw,2.1rem)] font-extrabold">System Directory</h1>
           <p className="mt-1 max-w-[65ch] text-[0.95rem] text-ink-dim">
-            Every internal system the team has built, in one place. Each card links straight
+            Backend hub (open by direct URL only — not linked from the site). Every system the team has built, in one place. Each card links straight
             to that system&apos;s live deployment.
           </p>
         </section>
