@@ -6,12 +6,14 @@ import { OrderVolumeChart } from "@/components/OrderVolumeChart";
 import { CategoryBars } from "@/components/CategoryBars";
 import { IndiaMapSection } from "@/components/IndiaMapSection";
 import { TrustPanel } from "@/components/TrustPanel";
+import { PromiseRow } from "@/components/PromiseRow";
+import { CtaBand } from "@/components/CtaBand";
 import { DashboardFooter } from "@/components/DashboardFooter";
 
 export default async function DashboardPage() {
   const asOf = await getMetricsAsOf();
   return (
-    <div className="theme-dark isolate min-h-screen">
+    <div className="isolate min-h-screen">
       <div className="grid-field" />
       <TopBar
         links={[
@@ -23,6 +25,7 @@ export default async function DashboardPage() {
       <main className="mx-auto w-full max-w-[1280px] px-4 pb-6 sm:px-6">
         <DashboardHeader live={asOf !== null} asOf={asOf} />
         <KpiRow />
+        <PromiseRow />
         <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-12">
           <div id="trends" className="lg:col-span-8">
             <OrderVolumeChart />
@@ -37,6 +40,7 @@ export default async function DashboardPage() {
             <TrustPanel />
           </div>
         </div>
+        <CtaBand />
         <DashboardFooter />
       </main>
     </div>

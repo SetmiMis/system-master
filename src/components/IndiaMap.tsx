@@ -12,9 +12,10 @@ export function IndiaMap({ states }: { states: StateEnquiries[] }) {
 
   useEffect(() => {
     let map: import("leaflet").Map | undefined;
+    let cancelled = false;
     (async () => {
       const L = (await import("leaflet")).default;
-      if (!el.current) return;
+      if (cancelled || !el.current) return;
       map = L.map(el.current, { scrollWheelZoom: false }).setView([22.8, 80], 4);
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: "&copy; OpenStreetMap contributors",
@@ -25,8 +26,8 @@ export function IndiaMap({ states }: { states: StateEnquiries[] }) {
       mappable.forEach((s) => {
         L.circleMarker([s.lat!, s.lng!], {
           radius: 4 + Math.sqrt(s.count / max) * 16,
-          color: "#86b6ef",
-          fillColor: "#3987e5",
+          color: "#013556",
+          fillColor: "#0b6fa8",
           fillOpacity: 0.55,
           weight: 1.5,
         })
@@ -36,6 +37,7 @@ export function IndiaMap({ states }: { states: StateEnquiries[] }) {
       });
     })();
     return () => {
+      cancelled = true;
       map?.remove();
     };
   }, [states]);

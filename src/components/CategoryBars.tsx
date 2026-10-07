@@ -2,8 +2,8 @@ import { getDemand } from "@/lib/data";
 import { Panel } from "./Panel";
 import { GrowBar } from "./GrowBar";
 
-// Validated categorical palette (dark surface), fixed order — see dataviz skill.
-const colors = ["#3987e5", "#d95926", "#199e70", "#c98500", "#d55181", "#9085e9"];
+// Categorical palette (light surface, matches --cat-1..6), fixed order — see dataviz skill.
+const colors = ["#0b6fa8", "#2fb6d9", "#1e9e6b", "#d18a17", "#8b5fbf", "#d2574b"];
 
 export async function CategoryBars() {
   const items = await getDemand();

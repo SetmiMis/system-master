@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 type Pt = { label: string; value: number };
 
 const W = 640, H = 230, L = 40, R = 16, T = 16, B = 28;
-const SERIES = "#3987e5"; // validated categorical slot 1 (dark)
+const SERIES = "#0b6fa8"; // --cat-1 (light surface)
 
 export function VolumeChart({ data }: { data: Pt[] }) {
   const [hover, setHover] = useState<number | null>(null);
@@ -73,7 +73,7 @@ export function VolumeChart({ data }: { data: Pt[] }) {
       </svg>
       {h && hover !== null && (
         <div
-          className="pointer-events-none absolute -translate-x-1/2 -translate-y-full rounded-lg border border-panel-line bg-[#0b1625] px-3 py-2 text-[0.78rem] shadow-xl"
+          className="pointer-events-none absolute -translate-x-1/2 -translate-y-full rounded-lg border border-panel-line bg-white px-3 py-2 text-ink text-[0.78rem] shadow-xl"
           style={{ left: `${(x(hover) / W) * 100}%`, top: `${(y(h.value) / H) * 100 - 3}%` }}
         >
           <div className="text-ink-dim">{h.label}</div>
