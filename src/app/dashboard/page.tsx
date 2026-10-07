@@ -20,7 +20,7 @@ export default async function DashboardPage() {
           ["Map", "#map"],
         ]}
       />
-      <main className="mx-auto max-w-[1280px] px-4 pb-6 sm:px-6">
+      <main className="mx-auto w-full max-w-[1280px] px-4 pb-6 sm:px-6">
         <DashboardHeader live={asOf !== null} asOf={asOf} />
         <KpiRow />
         <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-12">

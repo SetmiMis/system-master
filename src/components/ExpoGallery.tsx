@@ -60,7 +60,7 @@ export function ExpoGallery({ photos }: { photos: Photo[] }) {
         {cur && (
           <div className="relative">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`/expo/expo-${cur.id}.webp`} alt="Setmi India stall at an industry expo" className="block max-h-[92vh] max-w-[94vw] rounded-xl object-contain" />
+            <img src={`/expo/expo-${cur.id}.webp`} alt="Setmi India stall at an industry expo" className="block max-h-[88vh] max-w-[92vw] rounded-xl object-contain" />
             <button type="button" onClick={() => dialog.current?.close()} aria-label="Close" className="absolute right-2 top-2 flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white hover:bg-black/80">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4"><path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" /></svg>
             </button>

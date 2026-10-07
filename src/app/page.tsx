@@ -39,12 +39,12 @@ export default async function Home() {
         ]}
       />
       <HeroOverview rating={`★ ${reviews.rating} on Google · ${reviews.count} reviews`} />
-      <main className="mx-auto max-w-[1180px] px-6">
+      <main className="mx-auto w-full max-w-[1180px] px-6">
         <StorySection />
         <ProductsSection />
       </main>
       <ConnectorSection />
-      <main className="mx-auto max-w-[1180px] px-6">
+      <main className="mx-auto w-full max-w-[1180px] px-6">
         <ShopSection />
         <WhyChooseSection />
         <CertificationsSection />

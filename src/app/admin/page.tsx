@@ -11,7 +11,7 @@ export default async function AdminPage() {
     <>
       <div className="grid-field" />
       <TopBar links={[["Home", "/"]]} />
-      <main className="mx-auto max-w-[1180px] px-6">
+      <main className="mx-auto w-full max-w-[1180px] px-6">
         <section className="pb-6 pt-9">
           <div className="mb-2 flex items-center gap-2 font-data text-[0.72rem] uppercase tracking-[0.14em] text-accent-soft">
             <span className="h-1.5 w-1.5 rounded-full bg-ok shadow-[0_0_0_3px_rgba(4,124,0,0.18)]" />

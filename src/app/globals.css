@@ -141,6 +141,11 @@ h1, h2, h3 {
   background: var(--header-gradient);
 }
 
+.zoomable-dialog {
+  margin: auto;
+  overflow: visible;
+}
+
 .zoomable-dialog::backdrop {
   background: rgba(4, 10, 16, 0.85);
 }
