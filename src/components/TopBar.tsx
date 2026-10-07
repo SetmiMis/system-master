@@ -23,7 +23,7 @@ const defaultLinks: NavLink[] = [
 const compact = new Set(["Expo", "Overview", "Story", "Systems", "Support", "Get a quote"]);
 
 export function TopBar({ links = defaultLinks }: { links?: NavLink[] }) {
-  const allLinks: NavLink[] = [...links, ["Dashboard", "/dashboard"], ["Admin", "/admin"]];
+  const allLinks: NavLink[] = [...links, ["Dashboard", "/dashboard"]];
   const isMain = links === defaultLinks;
   const desktopLinks = isMain ? links.filter(([l]) => !compact.has(l)) : links;
 
@@ -45,7 +45,7 @@ export function TopBar({ links = defaultLinks }: { links?: NavLink[] }) {
             <MotionLink
               key={href}
               href={href}
-              className="text-[0.82rem] font-semibold text-white/80 hover:text-white"
+              className="py-2 text-[0.82rem] font-semibold text-white/80 hover:text-white"
             >
               {label}
             </MotionLink>
@@ -60,14 +60,8 @@ export function TopBar({ links = defaultLinks }: { links?: NavLink[] }) {
               Get a quote
             </MotionLink>
           )}
-          <MotionLink href="/dashboard" className="text-[0.82rem] font-semibold text-white/80 hover:text-white">
+          <MotionLink href="/dashboard" className="py-2 text-[0.82rem] font-semibold text-white/80 hover:text-white">
             Dashboard
-          </MotionLink>
-          <MotionLink
-            href="/admin"
-            className="rounded-md border border-white/25 px-3 py-1.5 text-[0.78rem] font-semibold text-white hover:bg-white/10"
-          >
-            Admin
           </MotionLink>
         </div>
 

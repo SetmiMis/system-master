@@ -11,7 +11,7 @@ export async function ShopSection() {
       <SectionHead
         eyebrow="Popular products"
         title="Ready to order today."
-        lede="Live prices from our online store — click any product to order, or request a bulk quote below."
+        lede="Live prices from our online store. Click a product to buy it on setmiindia.com, or request a bulk quote below."
       />
       <div className="space-y-10">
         {series.map((s) => (

@@ -16,9 +16,11 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Setmi India — The Order Pipeline",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://system-master-mu.vercel.app"),
+  title: "RF Connectors, AV Cables & Multimedia Hardware — Setmi India",
   description:
-    "The story of how a Setmi India order moves from enquiry to delivery — and the systems that carry it.",
+    "ISO 9001:2015 certified supplier of RF connectors (BNC, UHF, SMA, GX), solar MC4 connectors and AV cables since 1983. Pan-India dispatch, live prices, bulk quotes.",
+  alternates: { canonical: "/" },
   openGraph: { title: "Setmi India — RF connectors & AV cables since 1983", images: ["/products/hero.png"] },
 };
 

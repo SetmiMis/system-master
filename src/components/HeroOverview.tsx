@@ -29,8 +29,8 @@ export function HeroOverview({ rating }: { rating: string }) {
       <div className="relative mx-auto grid max-w-[1180px] items-center gap-12 px-6 py-16 lg:grid-cols-[1fr_1.05fr] lg:py-24">
         <div>
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 12 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.5 }}
             className="font-data text-[0.74rem] uppercase tracking-[0.2em] text-[#2fb6a1]"
           >
@@ -38,8 +38,8 @@ export function HeroOverview({ rating }: { rating: string }) {
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 20 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.6, delay: 0.08 }}
             className="mt-5 text-[clamp(2.6rem,6vw,4.4rem)] font-extrabold leading-[1.02]"
           >
@@ -48,8 +48,8 @@ export function HeroOverview({ rating }: { rating: string }) {
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 16 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.6, delay: 0.16 }}
             className="mt-6 max-w-[52ch] text-[1.05rem] leading-relaxed text-white/70"
           >
@@ -59,8 +59,8 @@ export function HeroOverview({ rating }: { rating: string }) {
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 14 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.5, delay: 0.24 }}
             className="mt-8 flex flex-wrap gap-3.5"
           >
@@ -79,8 +79,7 @@ export function HeroOverview({ rating }: { rating: string }) {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={false}
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mt-9 flex flex-wrap gap-2.5"
           >
@@ -102,8 +101,8 @@ export function HeroOverview({ rating }: { rating: string }) {
               href={c.href}
               target="_blank"
               rel="noopener"
-              initial={{ opacity: 0, y: 30, rotate: c.rot }}
-              animate={{ opacity: 1, y: c.dy, rotate: c.rot }}
+              initial={{ y: 30, rotate: c.rot }}
+              animate={{ y: c.dy, rotate: c.rot }}
               whileHover={{ rotate: 0, y: c.dy - 8, scale: 1.04 }}
               transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
               className="block rounded-xl bg-white p-2.5 shadow-[0_24px_50px_-18px_rgba(0,0,0,0.7)]"

@@ -10,6 +10,7 @@ export function DashboardFooter() {
           <a href="mailto:info@setmiindia.com">info@setmiindia.com</a>
           <a href="https://setmiindia.com" target="_blank" rel="noopener">setmiindia.com</a>
           <span>Serving since 1983</span>
+          <a href="/admin" className="opacity-60 hover:opacity-100">Team login</a>
         </div>
       </div>
     </footer>

@@ -11,11 +11,18 @@ const field =
 
 export function QuoteSection() {
   const [sent, setSent] = useState(false);
+  const messageOf = (form: HTMLFormElement) => {
+    const f = new FormData(form);
+    return `Hi Setmi India, I'd like a quote.\nName: ${f.get("name")}\nCompany: ${f.get("company")}\nProduct: ${f.get("series")}\nQuantity: ${f.get("qty")}\nDetails: ${f.get("notes")}`;
+  };
   function send(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const f = new FormData(e.currentTarget);
-    const text = `Hi Setmi India, I'd like a quote.\nName: ${f.get("name")}\nCompany: ${f.get("company")}\nProduct: ${f.get("series")}\nQuantity: ${f.get("qty")}\nDetails: ${f.get("notes")}`;
-    window.open(`https://wa.me/${WA}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+    window.open(`https://wa.me/${WA}?text=${encodeURIComponent(messageOf(e.currentTarget))}`, "_blank", "noopener");
+    setSent(true);
+  }
+  function sendEmail(form: HTMLFormElement) {
+    if (!form.reportValidity()) return;
+    window.location.href = `mailto:info@setmiindia.com?subject=${encodeURIComponent("Quote request")}&body=${encodeURIComponent(messageOf(form))}`;
     setSent(true);
   }
 
@@ -30,24 +37,46 @@ export function QuoteSection() {
         onSubmit={send}
         className="grid max-w-[720px] gap-4 rounded-2xl border border-panel-line bg-bg-elevated p-6 sm:grid-cols-2 sm:p-8"
       >
-        <input name="name" required placeholder="Your name" className={field} />
-        <input name="company" placeholder="Company" className={field} />
-        <select name="series" required defaultValue="" className={field}>
-          <option value="" disabled>Product series</option>
-          {series.map((s) => <option key={s}>{s}</option>)}
-        </select>
-        <input name="qty" required placeholder="Quantity (e.g. 500 pcs)" className={field} />
-        <textarea name="notes" rows={3} placeholder="Specs, size, application…" className={`${field} sm:col-span-2`} />
-        <button type="submit" className="btn-primary rounded-lg px-6 py-3 text-[0.92rem] font-bold text-white sm:col-span-2">
+        <label className="grid gap-1 text-[0.8rem] font-semibold">
+          Your name *
+          <input name="name" required autoComplete="name" placeholder="Your name" className={field} />
+        </label>
+        <label className="grid gap-1 text-[0.8rem] font-semibold">
+          Company
+          <input name="company" autoComplete="organization" placeholder="Company" className={field} />
+        </label>
+        <label className="grid gap-1 text-[0.8rem] font-semibold">
+          Product series *
+          <select name="series" required defaultValue="" className={field}>
+            <option value="" disabled>Select a series</option>
+            {series.map((s) => <option key={s}>{s}</option>)}
+          </select>
+        </label>
+        <label className="grid gap-1 text-[0.8rem] font-semibold">
+          Quantity *
+          <input name="qty" required placeholder="e.g. 500 pcs" className={field} />
+        </label>
+        <label className="grid gap-1 text-[0.8rem] font-semibold sm:col-span-2">
+          Details
+          <textarea name="notes" rows={3} placeholder="Specs, size, application…" className={field} />
+        </label>
+        <button type="submit" className="btn-primary rounded-lg px-6 py-3 text-[0.92rem] font-bold text-white">
           Send enquiry on WhatsApp
         </button>
+        <button
+          type="button"
+          onClick={(e) => sendEmail(e.currentTarget.form!)}
+          className="rounded-lg border border-panel-line px-6 py-3 text-[0.92rem] font-bold text-ink hover:border-accent hover:text-accent-strong"
+        >
+          Send by email instead
+        </button>
         <p className="text-[0.78rem] text-ink-dim sm:col-span-2">
-          Opens WhatsApp with your details filled in.
+          Opens WhatsApp (or your email app) with your details filled in. Nothing is sent until you press send there.
         </p>
         {sent && (
           <div className="flex items-center gap-2 text-[0.88rem] font-semibold text-ok sm:col-span-2" role="status">
             <LottieIcon name="success" loop={false} className="h-10 w-10" />
-            Enquiry ready — complete sending it in WhatsApp.
+            Enquiry ready — complete sending it in WhatsApp or your email app.
           </div>
         )}
       </form>
