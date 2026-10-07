@@ -4,6 +4,7 @@
 // unset or failing => the sample numbers below, shown with a "Demo data" badge.
 
 import { getReviews } from "@/lib/reviews";
+import { systems } from "@/lib/systems";
 
 export type Kpi = {
   label: string;
@@ -160,6 +161,8 @@ export type ProductCategory = { name: string; bestFor: string[]; image: string; 
 export type ProcessStep = { n: string; title: string; body: string };
 export type FaqItem = { q: string; a: string };
 export type LinkedSystem = {
+  group: string;
+  public?: boolean;
   name: string;
   description: string;
   url: string;
@@ -281,60 +284,8 @@ export async function getFaqs(): Promise<FaqItem[]> {
   ];
 }
 
+
+// Systems list lives in src/lib/systems.ts (edit there to add a system).
 export async function getLinkedSystems(): Promise<LinkedSystem[]> {
-  // To add a system: append { name, description (bio), url, status } below — it appears on /admin (hub) and /systems (public cards).
-  // ponytail: real deployment URLs, pulled from the team's Vercel projects.
-  // All sit behind Vercel's own sign-in (SSO protection) until a custom
-  // domain is attached — that's why "operational" here means "deployed and
-  // building successfully," not "publicly reachable."
-  return [
-    {
-      name: "Purchase FMS",
-      description: "Purchase order and vendor management.",
-      url: "https://setmi-purchase-fms.vercel.app",
-      status: "operational",
-    },
-    {
-      name: "Sales FMS",
-      description: "Sales order and client billing.",
-      url: "https://sales-fms.vercel.app",
-      status: "operational",
-    },
-    {
-      name: "Setmi OMS",
-      description: "Order management system — the desk this dashboard reflects.",
-      url: "https://setmi-oms.vercel.app",
-      status: "operational",
-    },
-    {
-      name: "ERP Manufacturing",
-      description: "Production planning and shop-floor tracking.",
-      url: "https://erp-manufacturing-frontend.vercel.app",
-      status: "operational",
-    },
-    {
-      name: "Staff Attendance",
-      description: "Attendance and shift tracking for floor staff.",
-      url: "https://staff-attendance-ten.vercel.app",
-      status: "operational",
-    },
-    {
-      name: "Budget vs Actual",
-      description: "Monthly budget tracking against actual spend.",
-      url: "https://budget-vs-actual-three.vercel.app",
-      status: "operational",
-    },
-    {
-      name: "Work Checklist",
-      description: "Daily task and checklist tracking.",
-      url: "https://work-checklist-xi.vercel.app",
-      status: "operational",
-    },
-    {
-      name: "MIS Control Center",
-      description: "Cross-system reporting and MIS dashboards.",
-      url: "https://mis-control-center.vercel.app",
-      status: "operational",
-    },
-  ];
+  return systems.map((s) => ({ ...s, status: "operational" as const }));
 }
